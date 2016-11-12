@@ -9,6 +9,7 @@ namespace WarGame.Models.Units
         private Guid id;
         private int life;
         private Point position;
+        private int capacity;
 
         #region Properties
         public Point Position
@@ -50,6 +51,19 @@ namespace WarGame.Models.Units
                 OnPropertyChanged("Life");
             }
         }
+
+        public int Capacity
+        {
+            get
+            {
+                return capacity;
+            }
+
+            set
+            {
+                capacity = value;
+            }
+        }
         #endregion
 
         public Unit(int y, int x, int life)
@@ -59,7 +73,7 @@ namespace WarGame.Models.Units
             Position.X = x;
             Life = life;
         }
-
+        public abstract void GatherResource(Tile argTile);
         public abstract void Attack();
         public abstract void Move(Point destination);
 

@@ -10,7 +10,7 @@ namespace WarGame.Models
         #region Private Fields
         private Map map;
         private List<Resource> resources;
-        private List<Unit> units;
+        
         private List<Building> buildings; 
         #endregion
 
