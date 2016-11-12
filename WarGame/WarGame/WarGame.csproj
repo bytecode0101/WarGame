@@ -44,6 +44,7 @@
     <Compile Include="Models\Buildings\Barrack.cs" />
     <Compile Include="Models\Buildings\Building.cs" />
     <Compile Include="Models\Buildings\Farm.cs" />
+    <Compile Include="Models\Buildings\Warehouse.cs" />
     <Compile Include="Models\Units\Farmer.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Map.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Models\Resources\Wood.cs" />
     <Compile Include="Models\Units\Soldier.cs" />
     <Compile Include="NewFile.cs" />
+    <Compile Include="Models\Pawn.cs" />
     <Compile Include="RunExamples.cs" />
     <Compile Include="Models\Tile.cs" />
     <Compile Include="Models\Units\Unit.cs" />
