@@ -9,7 +9,5 @@ namespace WarGame
     class NewFile
     {
         //add another line
-        //added a new line 1
-        //line10
     }
 }
