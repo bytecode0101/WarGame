@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using WarGame.Models.Buildings;
@@ -10,8 +11,9 @@ namespace WarGame.Models
     public class Game
     {
         #region Private Fields
-        private Player player;
+        private List<Player> players;
         private Map map;
+        private int currentTurn;
         #endregion
 
         #region Properties
@@ -25,20 +27,35 @@ namespace WarGame.Models
             set
             {
                 map = value;
-                Player.Map = map;
+                foreach (var item in players)
+                {
+                    item.Map = map;
+                }
             }
         }
 
-        public Player Player
+        public List<Player> Players
         {
             get
             {
-                return player;
+                return players;
             }
 
             set
             {
-                player = value;
+                players = value;
+            }
+        }
+
+        public int CurrentTurn
+        {
+            get
+            {
+                return currentTurn;
+            }
+            set
+            {
+                currentTurn = value;
             }
         }
         #endregion
@@ -46,7 +63,7 @@ namespace WarGame.Models
         #region Constructors
         public Game()
         {
-            Player = new Player();
+            Players = new List<Player>();
         }
         #endregion
 
@@ -73,6 +90,14 @@ namespace WarGame.Models
                 sw.Write(text);
             }
         }
+
+        public void NewTurn()
+        {
+            foreach (var item in Players)
+            {
+                item.NewTurn();
+            }
+        }
         #endregion
 
         #region Private Methods
@@ -80,12 +105,14 @@ namespace WarGame.Models
         {
             StringBuilder res = new StringBuilder();
             res.Append(Map.Serialize());
-
-            res.AppendLine(Player.Units.Count.ToString());
-            for (int i = 0; i < Player.Units.Count; i++)
+            foreach (var item in Players)
             {
-                res.AppendLine(string.Format("{0},{1},{2},{3}",
-                    Player.Units[i].GetType().Name, Player.Units[i].Position.Y, Player.Units[i].Position.X, Player.Units[i].Life));
+                res.AppendLine(item.Units.Count.ToString());
+                for (int i = 0; i < item.Units.Count; i++)
+                {
+                    res.AppendLine(string.Format("{0},{1},{2},{3}",
+                        item.Units[i].GetType().Name, item.Units[i].Position.Y, item.Units[i].Position.X, item.Units[i].Life));
+                }
             }
             return res.ToString();
         }
@@ -154,7 +181,9 @@ namespace WarGame.Models
                             int x = int.Parse(cells[2]);
                             int life = int.Parse(cells[3]);
                             var farmer = new Farmer(y, x, life);
-                            Player.AddUnit(farmer);
+                            Player _player = new Player();
+                            _player.AddUnit(farmer);
+                            Players.Add(_player);
                         }
                         break;
                     case "Soldier":
@@ -162,8 +191,10 @@ namespace WarGame.Models
                             int y = int.Parse(cells[1]);
                             int x = int.Parse(cells[2]);
                             int life = int.Parse(cells[3]);
-                            var farmer = new Soldier(y, x, life);
-                            Player.AddUnit(farmer);
+                            var soldier = new Soldier(y, x, life);
+                            Player _player = new Player();
+                            _player.AddUnit(soldier);
+                            Players.Add(_player);
                         }
                         break;
                     default:
@@ -171,7 +202,7 @@ namespace WarGame.Models
                 }
             }
 
-            var noOfBuildings= int.Parse(tr.ReadLine());
+            var noOfBuildings = int.Parse(tr.ReadLine());
             for (int i = 0; i < noOfUnits; i++)
             {
                 var row = tr.ReadLine();
@@ -184,7 +215,7 @@ namespace WarGame.Models
                             int x = int.Parse(cells[2]);
                             int life = int.Parse(cells[3]);
                             var farm = new Farm(y, x, life);
-                            Player.AddBuilding(farm);
+                            //Players.AddBuilding(farm);
                         }
                         break;
                     case "Barrack":
@@ -193,14 +224,14 @@ namespace WarGame.Models
                             int x = int.Parse(cells[2]);
                             int life = int.Parse(cells[3]);
                             var barrack = new Barrack(y, x, life);
-                            Player.AddBuilding(barrack);
+                            //Players.AddBuilding(barrack);
                         }
                         break;
                     default:
                         break;
                 }
             }
-            }
+        }
         #endregion
     }
 }

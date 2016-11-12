@@ -10,7 +10,7 @@ namespace WarGame.Models.Buildings
         }
         public Unit CreateFarmer()
         {
-            Farmer f = new Farmer();
+            Farmer f = new Farmer(2,2,100);
             return f;
         }
         

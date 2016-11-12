@@ -16,19 +16,29 @@ namespace WarGame
         static void SimpleGameExample()
         {
             Init();
-            Console.WriteLine("Life of first unit  {0}", game.Player.Units[0].Life);
-            game.Player.Units[0].PropertyChanged += RunExamples_PropertyChanged;
-            game.Player.Units[0].Life--;
             game.Start();
-            //game.Save("SavedGames\\game2.txt");
+            foreach (var item in game.Players)
+            {
+
+
+                Console.WriteLine("Life of first unit  {0}", item.Units[0].Life);
+                item.Units[0].PropertyChanged += RunExamples_PropertyChanged;
+                item.Units[0].Life--;
+
+                //game.Save("SavedGames\\game2.txt");
+
+            }
             game.SaveJson("SavedGames\\game2.txt");
         }
 
         private static void RunExamples_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Life")
+            foreach (var item in game.Players)
             {
-                Console.WriteLine("Life of first unit  {0}", game.Player.Units[0].Life);
+                if (e.PropertyName == "Life")
+                {
+                    Console.WriteLine("Life of first unit  {0}", item.Units[0].Life);
+                }
             }
         }
 

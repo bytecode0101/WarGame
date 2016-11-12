@@ -4,6 +4,7 @@ namespace WarGame.Models.Units
 {
     public class Farmer : Unit
     {
+
         public Farmer(int y, int x, int life) : base(y, x, life)
         {
         }
