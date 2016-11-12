@@ -87,5 +87,12 @@ namespace WarGame.Models
             Buildings.Add(building);
         }
         #endregion
+
+        #region Public Methods
+        public void NewTurn()
+        {
+
+        }
+        #endregion
     }
 }
