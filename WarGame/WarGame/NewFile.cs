@@ -8,5 +8,6 @@ namespace WarGame
 {
     class NewFile
     {
+        //add another line
     }
 }
