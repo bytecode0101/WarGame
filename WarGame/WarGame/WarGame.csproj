@@ -59,6 +59,7 @@
     <Compile Include="Models\Resources\Stone.cs" />
     <Compile Include="Models\Resources\Wood.cs" />
     <Compile Include="Models\Units\Soldier.cs" />
+    <Compile Include="NewFile.cs" />
     <Compile Include="RunExamples.cs" />
     <Compile Include="Models\Tile.cs" />
     <Compile Include="Models\Units\Unit.cs" />
