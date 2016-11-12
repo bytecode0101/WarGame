@@ -7,7 +7,7 @@ using WarGame.Models.Units;
 
 namespace WarGame.Models
 {
-    class Game
+    public class Game
     {
         #region Private Fields
         private Player player;
