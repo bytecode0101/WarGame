@@ -11,6 +11,12 @@ namespace WarGame.Models.Tests
     [TestClass()]
     public class GameTests
     {
+        [TestInitialize]
+        public void Init()
+        {
+
+        }
+
         [TestMethod()]
         public void GameTest()
         {
