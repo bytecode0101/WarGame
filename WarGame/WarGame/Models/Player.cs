@@ -41,18 +41,18 @@ namespace WarGame.Models
             }
         }
 
-        public List<Unit> Units
-        {
-            get
-            {
-                return units;
-            }
+        //public List<Unit> Units
+        //{
+        //    get
+        //    {
+        //        return units;
+        //    }
 
-            set
-            {
-                units = value;
-            }
-        }
+        //    set
+        //    {
+        //        units = value;
+        //    }
+        //}
 
         public List<Building> Buildings
         {
