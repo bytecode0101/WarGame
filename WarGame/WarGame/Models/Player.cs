@@ -159,11 +159,16 @@ namespace WarGame.Models
             }
         }
 
-        public void Build(AbstractBuildCapability buildCapability)
+        public void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
         {
-            var building = buildCapability.Build(null);
-            AddBuilding(building);
-           
+            var newbuilding = buildCapability.Build(building);
+            if (building == null)
+            {
+            
+            AddBuilding(newbuilding);
+            }
+            else
+            { building = newbuilding; }
         }
 
         #endregion

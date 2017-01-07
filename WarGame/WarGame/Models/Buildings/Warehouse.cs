@@ -59,6 +59,11 @@ namespace WarGame.Models.Buildings
                 }
         }
 
+        public override AbstractBuilding Upgrade()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

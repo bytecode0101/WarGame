@@ -97,5 +97,7 @@ namespace WarGame.Models.Buildings
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+
+        public abstract AbstractBuilding Upgrade();
     }
 }

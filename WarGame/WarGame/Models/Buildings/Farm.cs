@@ -1,5 +1,6 @@
 ﻿using WarGame.Models.Units;
 using WarGame.Models.Capabilities;
+using System;
 
 namespace WarGame.Models.Buildings
 {
@@ -15,6 +16,10 @@ namespace WarGame.Models.Buildings
             Farmer f = new Farmer(2,2,100);
             return f;
         }
-        
+
+        public override AbstractBuilding Upgrade()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

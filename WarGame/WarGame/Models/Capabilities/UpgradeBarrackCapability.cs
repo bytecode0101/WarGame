@@ -11,7 +11,7 @@ namespace WarGame.Models.Capabilities
     {
         public override AbstractBuilding Build(AbstractBuilding building)
         {
-            throw new NotImplementedException();
+            return building.Upgrade();
         }
     }
 }

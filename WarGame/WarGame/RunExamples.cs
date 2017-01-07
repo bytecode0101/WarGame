@@ -49,6 +49,7 @@ namespace WarGame
             Player player1 = new Player();
 
             player1.Build(new BuildBarrackCapability());
+            player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
         }
     }
 }
