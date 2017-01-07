@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    internal class Soldier : AbstractUnit
+    class Bowman : AbstractUnit
     {
-        public Soldier(int y, int x, int life) : base(y, x, life)
+        public Bowman(int y, int x, int life) : base(y, x, life)
         {
         }
 

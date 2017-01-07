@@ -4,7 +4,7 @@ using WarGame.Utils;
 
 namespace WarGame.Models.Units
 {
-    public abstract class Unit : Serializable, INotifyPropertyChanged
+    public abstract class AbstractUnit : Serializable, INotifyPropertyChanged
     {
         private Guid id;
         private int life;
@@ -66,7 +66,7 @@ namespace WarGame.Models.Units
         }
         #endregion
 
-        public Unit(int y, int x, int life)
+        public AbstractUnit(int y, int x, int life)
         {
             Position = new Point();
             Position.Y = y;

@@ -2,7 +2,7 @@
 
 namespace WarGame.Models.Units
 {
-    public class Farmer : Unit
+    public class Farmer : AbstractUnit
     {
 
         public Farmer(int y, int x, int life) : base(y, x, life)

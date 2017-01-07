@@ -9,7 +9,7 @@ namespace WarGame.Models
 {
     public class Pawn
     {
-        private List<Unit> units;
+        private List<AbstractUnit> units;
         private Tile location;
 
         public void MoveToLocation(Tile argLocation)

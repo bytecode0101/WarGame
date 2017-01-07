@@ -30,7 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,9 +45,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Buildings\Barrack.cs" />
-    <Compile Include="Models\Buildings\Building.cs" />
+    <Compile Include="Models\Buildings\AbstractBuilding.cs" />
+    <Compile Include="Models\Buildings\BowWorkshop.cs" />
     <Compile Include="Models\Buildings\Farm.cs" />
+    <Compile Include="Models\Buildings\UpgradeBarrack.cs" />
     <Compile Include="Models\Buildings\Warehouse.cs" />
+    <Compile Include="Models\Capabilities\AbstractBuildCapability.cs" />
+    <Compile Include="Models\Capabilities\AbstractTrainCapability.cs" />
+    <Compile Include="Models\Capabilities\BuildBarrackCapability.cs" />
+    <Compile Include="Models\Capabilities\BuildBowWorkshopCapability.cs" />
+    <Compile Include="Models\Capabilities\TrainBowmanCapability.cs" />
+    <Compile Include="Models\Capabilities\TrainFarmerCapability.cs" />
+    <Compile Include="Models\Capabilities\TrainSwordmanCapability.cs" />
+    <Compile Include="Models\Capabilities\UpgradeBarrackCapability.cs" />
+    <Compile Include="Models\Units\Bowman.cs" />
     <Compile Include="Models\Units\Farmer.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Map.cs" />
@@ -57,11 +71,12 @@
     <Compile Include="Models\Resources\Stone.cs" />
     <Compile Include="Models\Resources\Wood.cs" />
     <Compile Include="Models\Units\Soldier.cs" />
+    <Compile Include="Models\Units\Swordman.cs" />
     <Compile Include="NewFile.cs" />
     <Compile Include="Models\Pawn.cs" />
     <Compile Include="RunExamples.cs" />
     <Compile Include="Models\Tile.cs" />
-    <Compile Include="Models\Units\Unit.cs" />
+    <Compile Include="Models\Units\AbstractUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Serializable.cs" />
     <Compile Include="Utils\Serializer.cs" />

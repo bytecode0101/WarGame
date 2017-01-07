@@ -7,7 +7,7 @@ using WarGame.Models.Resources;
 
 namespace WarGame.Models.Buildings
 {
-    class Warehouse: Building
+    class Warehouse: AbstractBuilding
     {
         #region Private Fields
 

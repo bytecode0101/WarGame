@@ -2,6 +2,7 @@
 using WarGame.Models.Buildings;
 using WarGame.Models.Resources;
 using WarGame.Models.Units;
+using WarGame.Models.Capabilities;
 
 namespace WarGame.Models
 {
@@ -11,7 +12,11 @@ namespace WarGame.Models
         private Map map;
         private List<Resource> resources;
         
-        private List<Building> buildings; 
+        private List<AbstractBuilding> buildings; 
+        private List<AbstractBuildCapability> buildCapabilities; 
+        private List<AbstractTrainCapability> trainCapabilities; 
+        private List<AbstractUnit> units; 
+
         #endregion
 
         #region Properties
@@ -41,20 +46,8 @@ namespace WarGame.Models
             }
         }
 
-        //public List<Unit> Units
-        //{
-        //    get
-        //    {
-        //        return units;
-        //    }
 
-        //    set
-        //    {
-        //        units = value;
-        //    }
-        //}
-
-        public List<Building> Buildings
+        public List<AbstractBuilding> Buildings
         {
             get
             {
@@ -66,6 +59,45 @@ namespace WarGame.Models
                 buildings = value;
             }
         }
+
+        public List<AbstractUnit> Units
+        {
+            get
+            {
+                return units;
+            }
+
+            set
+            {
+                units = value;
+            }
+        }
+
+        public List<AbstractTrainCapability> TrainCapabilities
+        {
+            get
+            {
+                return trainCapabilities;
+            }
+
+            set
+            {
+                trainCapabilities = value;
+            }
+        }
+
+        public List<AbstractBuildCapability> BuildCapabilities
+        {
+            get
+            {
+                return buildCapabilities;
+            }
+
+            set
+            {
+                buildCapabilities = value;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -73,19 +105,15 @@ namespace WarGame.Models
         {
             map = new Map();
             Resources = new List<Resource>();
-            Units = new List<Unit>();
-            Buildings = new List<Building>();
+            Units = new List<AbstractUnit>();
+            Buildings = new List<AbstractBuilding>();
+            TrainCapabilities = new List<AbstractTrainCapability>();
+            BuildCapabilities = new List<AbstractBuildCapability>();
+            AddBuilding(new Farm(0, 0, 100));
+
         }
 
-        public void AddUnit(Unit unit)
-        {
-            Units.Add(unit);
-        }
-
-        internal void AddBuilding(Building building)
-        {
-            Buildings.Add(building);
-        }
+     
         #endregion
 
         #region Public Methods
@@ -93,6 +121,51 @@ namespace WarGame.Models
         {
 
         }
+
+        public void AddUnit(AbstractUnit unit)
+        {
+            Units.Add(unit);
+        }
+
+        private void AddBuilding(AbstractBuilding building)
+        {
+            Buildings.Add(building);
+
+            bool capabilityExists = false;
+            foreach (var capability in building.BuildCapabilities)
+            {
+                capabilityExists = false;
+                foreach (var bcapability in BuildCapabilities)
+                    if (bcapability.GetType() == capability.GetType())
+                    {
+                        capabilityExists = true;
+                        break;
+                    }
+                if (!capabilityExists)
+                    BuildCapabilities.Add(capability);
+            }
+
+            foreach (var capability in building.TrainCapabilities)
+            {
+                capabilityExists = false;
+                foreach (var bcapability in BuildCapabilities)
+                    if (bcapability.GetType() == capability.GetType())
+                    {
+                        capabilityExists = true;
+                        break;
+                    }
+                if (!capabilityExists)
+                    TrainCapabilities.Add(capability);
+            }
+        }
+
+        public void Build(AbstractBuildCapability buildCapability)
+        {
+            var building = buildCapability.Build(null);
+            AddBuilding(building);
+           
+        }
+
         #endregion
     }
 }

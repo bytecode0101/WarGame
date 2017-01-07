@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using WarGame.Models.Capabilities;
+
 
 namespace WarGame.Models.Buildings
 {
-    public abstract class Building : INotifyPropertyChanged
+    public abstract class AbstractBuilding : INotifyPropertyChanged
     {
         private int life;
         private Guid id;
         private Point position;
+        protected List<AbstractBuildCapability> buildCapabilities = new List<AbstractBuildCapability>();
+        protected List<AbstractTrainCapability> trainCapabilities = new List<AbstractTrainCapability>();
 
         public int Life
         {
@@ -47,10 +52,36 @@ namespace WarGame.Models.Buildings
             }
         }
 
+        public List<AbstractBuildCapability> BuildCapabilities
+        {
+            get
+            {
+                return buildCapabilities;
+            }
+
+            set
+            {
+                buildCapabilities = value;
+            }
+        }
+
+        public List<AbstractTrainCapability> TrainCapabilities
+        {
+            get
+            {
+                return trainCapabilities;
+            }
+
+            set
+            {
+                trainCapabilities = value;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region Constructors
-        public Building(int y, int x, int life)
+        public AbstractBuilding(int y, int x, int life)
         {
             Position = new Point();
             Position.Y = y;

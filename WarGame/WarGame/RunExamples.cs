@@ -1,6 +1,7 @@
 ﻿using System;
 using WarGame.Models;
-
+using WarGame.Models.Buildings;
+using WarGame.Models.Capabilities;
 namespace WarGame
 {
     public class RunExamples
@@ -44,7 +45,10 @@ namespace WarGame
 
         public static void Run()
         {
-            SimpleGameExample();
+            //SimpleGameExample();
+            Player player1 = new Player();
+
+            player1.Build(new BuildBarrackCapability());
         }
     }
 }
