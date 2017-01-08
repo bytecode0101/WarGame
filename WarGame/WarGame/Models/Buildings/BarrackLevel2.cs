@@ -11,10 +11,7 @@ namespace WarGame.Models.Buildings
 
         public override AbstractBuilding Upgrade()
         {
-            DecoratorBuilding upgradedBarrack = new BarrackLevel2(this.Position.X, this.Position.Y, 100);
-            upgradedBarrack.Building = this;
-
-            return upgradedBarrack;
+            throw new NotImplementedException();
         }
     }
 }

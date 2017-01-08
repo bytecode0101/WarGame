@@ -3,6 +3,7 @@ using WarGame.Models.Buildings;
 using WarGame.Models.Resources;
 using WarGame.Models.Units;
 using WarGame.Models.Capabilities;
+using WarGame.Wrapper;
 
 namespace WarGame.Models
 {
@@ -12,7 +13,7 @@ namespace WarGame.Models
         private Map map;
         private List<Resource> resources;
         
-        private List<AbstractBuilding> buildings; 
+        private List<BuildingWrapper> buildingWrappers; 
         private List<AbstractBuildCapability> buildCapabilities; 
         private List<AbstractTrainCapability> trainCapabilities; 
         private List<AbstractUnit> units; 
@@ -47,18 +48,6 @@ namespace WarGame.Models
         }
 
 
-        public List<AbstractBuilding> Buildings
-        {
-            get
-            {
-                return buildings;
-            }
-
-            set
-            {
-                buildings = value;
-            }
-        }
 
         public List<AbstractUnit> Units
         {
@@ -98,6 +87,22 @@ namespace WarGame.Models
                 buildCapabilities = value;
             }
         }
+
+        internal List<BuildingWrapper> BuildingWrappers
+        {
+            get
+            {
+                return buildingWrappers;
+            }
+
+            set
+            {
+                buildingWrappers = value;
+            }
+        }
+
+
+
         #endregion
 
         #region Constructors
@@ -106,10 +111,10 @@ namespace WarGame.Models
             map = new Map();
             Resources = new List<Resource>();
             Units = new List<AbstractUnit>();
-            Buildings = new List<AbstractBuilding>();
+            BuildingWrappers = new List<BuildingWrapper>();
             TrainCapabilities = new List<AbstractTrainCapability>();
             BuildCapabilities = new List<AbstractBuildCapability>();
-            AddBuilding(new Farm(0, 0, 100));
+            AddBuilding(new BuildingWrapper(new Farm(0, 0, 100)));
 
         }
 
@@ -117,6 +122,7 @@ namespace WarGame.Models
         #endregion
 
         #region Public Methods
+
         public void NewTurn()
         {
 
@@ -127,12 +133,12 @@ namespace WarGame.Models
             Units.Add(unit);
         }
 
-        private void AddBuilding(AbstractBuilding building)
+        private void AddBuilding(BuildingWrapper wrapper)
         {
-            Buildings.Add(building);
+            BuildingWrappers.Add(wrapper);
 
             bool capabilityExists = false;
-            foreach (var capability in building.BuildCapabilities)
+            foreach (var capability in wrapper.Building.BuildCapabilities)
             {
                 capabilityExists = false;
                 foreach (var bcapability in BuildCapabilities)
@@ -145,7 +151,7 @@ namespace WarGame.Models
                     BuildCapabilities.Add(capability);
             }
 
-            foreach (var capability in building.TrainCapabilities)
+            foreach (var capability in wrapper.Building.TrainCapabilities)
             {
                 capabilityExists = false;
                 foreach (var bcapability in BuildCapabilities)
@@ -162,15 +168,32 @@ namespace WarGame.Models
         public void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
         {
             var newbuilding = buildCapability.Build(building);
+            BuildingWrapper wrapper = new BuildingWrapper(newbuilding);
             if (building == null)
             {
-            
-            AddBuilding(newbuilding);
+                AddBuilding(wrapper);
             }
             else
             {
-                Buildings[Buildings.IndexOf(building)] = newbuilding;
+                foreach(var bWrapper in BuildingWrappers)
+                {
+                    if (bWrapper.Building == building)
+                    {
+                        bWrapper.Building = newbuilding;
+                        break;
+                    }
+                }
             }
+        }
+        
+        public void Attack(int x, int y)
+        {
+
+        }
+
+        public void Move(int x, int y)
+        {
+
         }
 
         #endregion
