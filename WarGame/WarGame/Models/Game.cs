@@ -146,19 +146,19 @@ namespace WarGame.Models
                     switch (resource)
                     {
                         case "F":
-                            map.AddResource(new Food(), y, x);
+                            map.AddResource(Resource.Food, y, x);
                             break;
                         case "S":
-                            map.AddResource(new Stone(), y, x);
+                            map.AddResource(Resource.Stone, y, x);
                             break;
                         case "G":
-                            map.AddResource(new Gold(), y, x);
+                            map.AddResource(Resource.Gold, y, x);
                             break;
                         case "I":
-                            map.AddResource(new Iron(), y, x);
+                            map.AddResource(Resource.Iron, y, x);
                             break;
                         case "W":
-                            map.AddResource(new Wood(), y, x);
+                            map.AddResource(Resource.Wood, y, x);
                             break;
                         default:
                             //TODO: log error 
