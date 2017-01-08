@@ -61,6 +61,9 @@
     <Compile Include="Models\Capabilities\TrainSwordmanCapability.cs" />
     <Compile Include="Models\Capabilities\UpgradeBarrackCapability.cs" />
     <Compile Include="Models\Units\Bowman.cs" />
+    <Compile Include="Models\Units\BowmanUpgrade1.cs" />
+    <Compile Include="Models\Units\BowmanUpgrade2.cs" />
+    <Compile Include="Models\Units\DecoratorUnits.cs" />
     <Compile Include="Models\Units\Farmer.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Map.cs" />
@@ -72,8 +75,13 @@
     <Compile Include="Models\Resources\Food.cs" />
     <Compile Include="Models\Resources\Stone.cs" />
     <Compile Include="Models\Resources\Wood.cs" />
+    <Compile Include="Models\Units\FarmerUpgrade1.cs" />
+    <Compile Include="Models\Units\FarmerUpgrade2.cs" />
     <Compile Include="Models\Units\Soldier.cs" />
+    <Compile Include="Models\Units\SoldierUpgrade1.cs" />
+    <Compile Include="Models\Units\SoldierUpgrade2.cs" />
     <Compile Include="Models\Units\Swordman.cs" />
+    <Compile Include="Models\Units\SwordmanUpgrade1.cs" />
     <Compile Include="NewFile.cs" />
     <Compile Include="Models\Pawn.cs" />
     <Compile Include="RunExamples.cs" />
