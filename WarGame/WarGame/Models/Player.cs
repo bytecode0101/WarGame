@@ -168,7 +168,9 @@ namespace WarGame.Models
             AddBuilding(newbuilding);
             }
             else
-            { building = newbuilding; }
+            {
+                Buildings[Buildings.IndexOf(building)] = newbuilding;
+            }
         }
 
         #endregion
