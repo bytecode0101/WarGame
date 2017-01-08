@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    class Bowman : AbstractUnit
+    class SwordManUpgrade2<T> : DecoratorUnit<T> where T: SwordManUpgrade1<Farmer>
     {
-        public Bowman(int y, int x, int life) : base(y, x, life)
-        {
-        }
 
         public override void Attack()
         {
@@ -26,15 +23,5 @@ namespace WarGame.Models.Units
         {
             throw new NotImplementedException();
         }
-
-        public override AbstractUnit Upgrade()
-        {
-            DecoratorUnits upgradedBowman = new BowmanUpgrade1(this.Position.X, this.Position.Y, 150);
-            upgradedBowman.Unit = this;
-
-            return upgradedBowman;
-        }
     }
 }
-
-

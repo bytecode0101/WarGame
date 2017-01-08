@@ -66,6 +66,10 @@ namespace WarGame.Models.Units
         }
         #endregion
 
+        public AbstractUnit()
+        {
+        }
+
         public AbstractUnit(int y, int x, int life)
         {
             Position = new Point();
@@ -86,7 +90,5 @@ namespace WarGame.Models.Units
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
-        public abstract AbstractUnit Upgrade();
     }
 }

@@ -186,15 +186,13 @@ namespace WarGame.Models
                             Players.Add(_player);
                         }
                         break;
-                    case "Soldier":
+                    case "Swordman":
                         {
                             int y = int.Parse(cells[1]);
                             int x = int.Parse(cells[2]);
                             int life = int.Parse(cells[3]);
-                            var soldier = new Soldier(y, x, life);
-                            Player _player = new Player();
-                            _player.AddUnit(soldier);
-                            Players.Add(_player);
+                            var farmer = new Farmer(y, x, life);
+                          //TODO: upgrade the farmer, update the player
                         }
                         break;
                     default:
