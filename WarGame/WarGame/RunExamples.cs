@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using WarGame.Models;
 using WarGame.Models.Buildings;
 using WarGame.Models.Capabilities;
+using WarGame.Models.Resources;
 using WarGame.Models.Units;
 
 namespace WarGame
@@ -69,6 +70,12 @@ namespace WarGame
             player1.Units.Add(farmer1);
             player1.Units.Add(farmer2);
             player1.Units.Add(farmer3);
+            Map map = new Map();
+            //map.Tiles = new Tile[,] { 
+            //                            { Resource.Food, Resource.Iron, Resource.Gold, Resource.Stone, Resource.Wood }, 
+            //                            { Resource.Stone, Resource.Wood, Resource.Food, Resource.Iron, Resource.Gold }
+            //                        };
+            //player1.Map = new Map
         }
     }
 }

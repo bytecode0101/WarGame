@@ -10,22 +10,32 @@ namespace WarGame.Models
     public class Pawn
     {
         private List<AbstractUnit> units;
-        private Tile location;
+        private Point location;
+
+        public Point Location
+        {
+            get
+            {
+                return location;
+            }
+
+            set
+            {
+                location = value;
+            }
+        }
 
         public event GatherEvent GatherEvent;
 
-        public void MoveToLocation(Tile argLocation)
+        public void MoveToLocation(Point argLocation)
         {
-
+            Location = argLocation;
         }
 
         
-        private void OnResourceGathered(Point location)
+        private void OnResourceGathered()
         {
-            if (GatherEvent != null)
-            {
-                GatherEvent(location);
-            }
+            GatherEvent?.Invoke();
 
             System.Console.WriteLine("Resources were gathered.");
         }

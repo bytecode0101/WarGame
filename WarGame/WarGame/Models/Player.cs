@@ -134,11 +134,11 @@ namespace WarGame.Models
             Pawn.GatherEvent += Pawn_GatherEvent; 
         }
 
-        private void Pawn_GatherEvent(Point location)
+        private void Pawn_GatherEvent()
         {
             foreach (var unit in units)
             {
-                Resources.Add(map.GetResourcePosition(location), unit.Capacity);
+                Resources.Add(map.GetResourcePosition(pawn.Location), unit.Capacity);
             }
            
          

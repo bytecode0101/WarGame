@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models
 {
-    public delegate void GatherEvent(Point location);
+    public delegate void GatherEvent();
 }
