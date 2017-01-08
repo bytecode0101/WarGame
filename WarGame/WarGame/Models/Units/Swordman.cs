@@ -26,5 +26,10 @@ namespace WarGame.Models.Units
     {
         throw new NotImplementedException();
     }
-}
+
+        public override AbstractUnit Upgrade()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

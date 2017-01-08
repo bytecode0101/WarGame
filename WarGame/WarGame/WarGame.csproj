@@ -71,16 +71,12 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\Resources\Resource.cs" />
-    <Compile Include="Models\Resources\Food.cs" />
-    <Compile Include="Models\Resources\Stone.cs" />
-    <Compile Include="Models\Resources\Wood.cs" />
     <Compile Include="Models\Units\FarmerUpgrade1.cs" />
     <Compile Include="Models\Units\FarmerUpgrade2.cs" />
     <Compile Include="Models\Units\Soldier.cs" />
     <Compile Include="Models\Units\SoldierUpgrade1.cs" />
     <Compile Include="Models\Units\SoldierUpgrade2.cs" />
     <Compile Include="Models\Units\Swordman.cs" />
-    <Compile Include="NewFile.cs" />
     <Compile Include="Models\Pawn.cs" />
     <Compile Include="RunExamples.cs" />
     <Compile Include="Models\Tile.cs" />
