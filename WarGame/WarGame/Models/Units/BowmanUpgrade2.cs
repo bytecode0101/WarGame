@@ -9,11 +9,6 @@ namespace WarGame.Models.Units
 {
     class BowmanUpgrade2<T>:DecoratorUnit<T> where T: BowmanUpgrade1<Farmer>
     {
-        public BowmanUpgrade2(int x,int y,int life):base(x,y,life)
-        {
-
-        }
-
         public override void Attack()
         {
             throw new NotImplementedException();

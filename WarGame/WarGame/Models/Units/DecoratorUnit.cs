@@ -10,11 +10,6 @@ namespace WarGame.Models.Units
     {
         AbstractUnit unit;
 
-        public DecoratorUnit(int x,int y ,int life):base (x,y,life)
-        {
-
-        }
-
         public AbstractUnit Unit
         {
             get

@@ -8,9 +8,8 @@ namespace WarGame.Models.Units
 {
     class SwordManUpgrade1<T> : DecoratorUnit<T> where T : Farmer
     {
-        public SwordManUpgrade1(int x, int y, int life) : base(x, y, life)
-        {
-        }
+        private int extraLife = 50;
+        private int extraAttack = 5;
 
         public override void Attack()
         {

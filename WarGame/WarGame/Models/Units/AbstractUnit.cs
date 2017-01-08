@@ -66,6 +66,10 @@ namespace WarGame.Models.Units
         }
         #endregion
 
+        public AbstractUnit()
+        {
+        }
+
         public AbstractUnit(int y, int x, int life)
         {
             Position = new Point();
