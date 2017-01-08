@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using WarGame.Models;
 using WarGame.Models.Buildings;
 using WarGame.Models.Capabilities;
+using WarGame.Models.Units;
+
 namespace WarGame
 {
     public class RunExamples
@@ -46,11 +49,26 @@ namespace WarGame
         public static void Run()
         {
             //SimpleGameExample();
-            Player player1 = new Player();
+            //Player player1 = new Player();
 
-            player1.Build(new BuildBarrackCapability());
-            player1.Build(new UpgradeBarrackCapability(), player1.BuildingWrappers[1].Building);
-            player1.Build(new UpgradeBarrackCapability(), player1.BuildingWrappers[1].Building);
+            //player1.Build(new BuildBarrackCapability());
+            //player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
+
+            GatheringResources();
+        }
+
+        private static void GatheringResources()
+        {
+            Player player1 = new Player();
+            AbstractUnit farmer1 = new Farmer(0, 0, 100);
+            farmer1.Capacity = 10;
+            AbstractUnit farmer2 = new Farmer(0, 0, 100);
+            farmer2.Capacity = 10;
+            AbstractUnit farmer3 = new Farmer(0, 0, 100);
+            farmer3.Capacity = 10;
+            player1.Units.Add(farmer1);
+            player1.Units.Add(farmer2);
+            player1.Units.Add(farmer3);
         }
     }
 }

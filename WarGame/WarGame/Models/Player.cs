@@ -3,6 +3,7 @@ using WarGame.Models.Buildings;
 using WarGame.Models.Resources;
 using WarGame.Models.Units;
 using WarGame.Models.Capabilities;
+using System;
 using WarGame.Wrapper;
 
 namespace WarGame.Models
@@ -11,8 +12,9 @@ namespace WarGame.Models
     {
         #region Private Fields
         private Map map;
-        private List<Resource> resources;
-        
+        private Dictionary<Resource, int> resources;
+        private Pawn pawn;
+               
         private List<BuildingWrapper> buildingWrappers; 
         private List<AbstractBuildCapability> buildCapabilities; 
         private List<AbstractTrainCapability> trainCapabilities; 
@@ -25,16 +27,16 @@ namespace WarGame.Models
         {
             get
             {
-                return map;
+                return Map;
             }
 
             set
             {
-                map = value;
+                Map = value;
             }
         }
 
-        public List<Resource> Resources
+        public Dictionary<Resource,int> Resources
         {
             get
             {
@@ -88,6 +90,19 @@ namespace WarGame.Models
             }
         }
 
+        public Pawn Pawn
+        {
+            get
+            {
+                return pawn;
+            }
+
+            set
+            {
+                pawn = value;
+            }
+        }
+
         internal List<BuildingWrapper> BuildingWrappers
         {
             get
@@ -108,17 +123,29 @@ namespace WarGame.Models
         #region Constructors
         public Player()
         {
-            map = new Map();
-            Resources = new List<Resource>();
+            Map = new Map();
+            Resources = new Dictionary<Resource, int>();
             Units = new List<AbstractUnit>();
             BuildingWrappers = new List<BuildingWrapper>();
             TrainCapabilities = new List<AbstractTrainCapability>();
             BuildCapabilities = new List<AbstractBuildCapability>();
             AddBuilding(new BuildingWrapper(new Farm(0, 0, 100)));
+            Pawn = new Pawn();
+            Pawn.GatherEvent += Pawn_GatherEvent; 
+        }
+
+        private void Pawn_GatherEvent(Point location)
+        {
+            foreach (var unit in units)
+            {
+                Resources.Add(map.GetResourcePosition(location), unit.Capacity);
+            }
+           
+         
 
         }
 
-     
+
         #endregion
 
         #region Public Methods
@@ -195,6 +222,8 @@ namespace WarGame.Models
         {
 
         }
+
+        
 
         #endregion
     }

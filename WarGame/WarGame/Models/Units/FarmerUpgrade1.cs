@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    public class Farmer : AbstractUnit
+    class FarmerUpgrade1:DecoratorUnits
     {
-
-        public Farmer(int y, int x, int life) : base(y, x, life)
+        public FarmerUpgrade1(int x, int y, int life) : base(x, y, life)
         {
+
         }
 
         public override void Attack()
@@ -16,7 +20,7 @@ namespace WarGame.Models.Units
 
         public override void GatherResource(Tile argTile)
         {
-
+            throw new NotImplementedException();
         }
 
         public override void Move(Point destination)
@@ -30,9 +34,6 @@ namespace WarGame.Models.Units
             upgradedFarmer.Unit = this;
 
             return upgradedFarmer;
-
         }
     }
 }
-
-

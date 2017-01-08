@@ -85,5 +85,10 @@ namespace WarGame.Models
             }
             return res.ToString();
         }
+
+        public Resource GetResourcePosition(Point location)
+        {
+            return Tiles[location.X, location.Y].Resource;
+        }
     }
 }

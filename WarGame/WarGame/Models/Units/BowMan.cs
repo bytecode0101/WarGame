@@ -26,5 +26,15 @@ namespace WarGame.Models.Units
         {
             throw new NotImplementedException();
         }
+
+        public override AbstractUnit Upgrade()
+        {
+            DecoratorUnits upgradedBowman = new BowmanUpgrade1(this.Position.X, this.Position.Y, 150);
+            upgradedBowman.Unit = this;
+
+            return upgradedBowman;
+        }
     }
 }
+
+
