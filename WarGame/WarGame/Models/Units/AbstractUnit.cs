@@ -86,7 +86,5 @@ namespace WarGame.Models.Units
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
-        public abstract AbstractUnit Upgrade();
     }
 }

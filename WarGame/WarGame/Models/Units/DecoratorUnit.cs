@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    abstract class DecoratorUnits:AbstractUnit
+    public abstract class DecoratorUnit<T>:AbstractUnit
     {
         AbstractUnit unit;
 
-        public DecoratorUnits(int x,int y ,int life):base (x,y,life)
+        public DecoratorUnit(int x,int y ,int life):base (x,y,life)
         {
 
         }
@@ -26,6 +26,12 @@ namespace WarGame.Models.Units
             {
                 unit = value;
             }
+        }
+
+        public virtual AbstractUnit Upgrade(AbstractUnit unit)
+        {
+            this.Unit = unit;
+            return this;
         }
     }
 }

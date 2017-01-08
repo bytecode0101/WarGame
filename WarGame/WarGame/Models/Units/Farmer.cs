@@ -23,15 +23,6 @@ namespace WarGame.Models.Units
         {
             throw new NotImplementedException();
         }
-
-        public override AbstractUnit Upgrade()
-        {
-            DecoratorUnits upgradedFarmer = new FarmerUpgrade1(this.Position.X, this.Position.Y, 150);
-            upgradedFarmer.Unit = this;
-
-            return upgradedFarmer;
-
-        }
     }
 }
 

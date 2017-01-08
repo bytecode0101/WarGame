@@ -1,6 +1,4 @@
-﻿using WarGame.Models.Buildings;
-
-namespace WarGame.Wrapper
+﻿namespace WarGame.Models.Buildings
 {
     class BuildingWrapper
     {

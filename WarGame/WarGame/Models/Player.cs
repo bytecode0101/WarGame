@@ -4,7 +4,6 @@ using WarGame.Models.Resources;
 using WarGame.Models.Units;
 using WarGame.Models.Capabilities;
 using System;
-using WarGame.Wrapper;
 
 namespace WarGame.Models
 {
@@ -223,7 +222,12 @@ namespace WarGame.Models
 
         }
 
-        
+        public void UpgradeUnit(AbstractUnit unit, DecoratorUnit<AbstractUnit> upgrade)
+        {
+            var indexOfUnitToBeUpgraded = Units.IndexOf(unit);
+            var upgradedUnit = upgrade.Upgrade(unit);
+            Units[indexOfUnitToBeUpgraded] = upgradedUnit;
+        }
 
         #endregion
     }
