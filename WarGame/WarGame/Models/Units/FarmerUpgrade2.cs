@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    class FarmerUpgrade2:AbstractUnit
+    class FarmerUpgrade2:DecoratorUnits
     {
         public FarmerUpgrade2(int x, int y, int life) : base(x, y, life)
         {
