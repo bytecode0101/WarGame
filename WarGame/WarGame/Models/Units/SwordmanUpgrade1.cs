@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    class SwordManUpgrade1<T> : DecoratorUnit<T> where T : Farmer
+    class SwordManUpgrade1 : DecoratorUnit
     {
         private int extraLife = 50;
         private int extraAttack = 5;
 
+        public SwordManUpgrade1(Farmer farmer)
+        {
+            Unit = farmer;
+        }
+
         public override void Attack()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Attack power: " + extraLife);
         }
 
         public override void GatherResource(Tile argTile)

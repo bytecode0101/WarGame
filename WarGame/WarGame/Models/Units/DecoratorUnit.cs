@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    public abstract class DecoratorUnit<T>:AbstractUnit
+    public abstract class DecoratorUnit :AbstractUnit
     {
         AbstractUnit unit;
 
@@ -23,9 +23,8 @@ namespace WarGame.Models.Units
             }
         }
 
-        public virtual AbstractUnit Upgrade(AbstractUnit unit)
+        public virtual AbstractUnit Upgrade()
         {
-            this.Unit = unit;
             return this;
         }
     }

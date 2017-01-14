@@ -73,7 +73,6 @@
     <Compile Include="Models\Units\SwordManUpgrade1.cs" />
     <Compile Include="Models\Units\SwordManUpgrade2.cs" />
     <Compile Include="Models\Pawn.cs" />
-    <Compile Include="Models\Units\UnitWrapper.cs" />
     <Compile Include="RunExamples.cs" />
     <Compile Include="Models\Tile.cs" />
     <Compile Include="Models\Units\AbstractUnit.cs" />

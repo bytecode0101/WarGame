@@ -64,18 +64,41 @@ namespace WarGame
             AbstractUnit farmer1 = new Farmer(0, 0, 100);
             farmer1.Capacity = 10;
             AbstractUnit farmer2 = new Farmer(0, 0, 100);
-            farmer2.Capacity = 10;
             AbstractUnit farmer3 = new Farmer(0, 0, 100);
             farmer3.Capacity = 10;
             player1.Units.Add(farmer1);
             player1.Units.Add(farmer2);
             player1.Units.Add(farmer3);
-            Map map = new Map();
+
+            player1.ListUnits();
+
+            var farmer = player1.Units[0] as Farmer;
+            if (farmer!=null)
+            {
+                player1.UpgradeUnit(new SwordManUpgrade1(farmer));
+            }
+
+            player1.ListUnits();
+
+            var swordman = player1.Units[0] as SwordManUpgrade1;
+            if (swordman != null)
+            {
+                player1.UpgradeUnit(new SwordManUpgrade2(swordman));
+            }
+
+            player1.ListUnits();
+
+            //Map map = new Map();
             //map.Tiles = new Tile[,] { 
             //                            { Resource.Food, Resource.Iron, Resource.Gold, Resource.Stone, Resource.Wood }, 
             //                            { Resource.Stone, Resource.Wood, Resource.Food, Resource.Iron, Resource.Gold }
             //                        };
             //player1.Map = new Map
+        }
+
+        private static void UpgradeExample()
+        {
+           
         }
     }
 }

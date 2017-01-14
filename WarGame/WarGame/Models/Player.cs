@@ -122,7 +122,7 @@ namespace WarGame.Models
         #region Constructors
         public Player()
         {
-            Map = new Map();
+            //Map = new Map();
             Resources = new Dictionary<Resource, int>();
             Units = new List<AbstractUnit>();
             BuildingWrappers = new List<BuildingWrapper>();
@@ -222,11 +222,19 @@ namespace WarGame.Models
 
         }
 
-        public void UpgradeUnit(AbstractUnit unit, DecoratorUnit<AbstractUnit> upgrade)
+        public void UpgradeUnit(DecoratorUnit upgrade)
         {
-            var indexOfUnitToBeUpgraded = Units.IndexOf(unit);
-            var upgradedUnit = upgrade.Upgrade(unit);
+            var indexOfUnitToBeUpgraded = Units.IndexOf(upgrade.Unit);
+            var upgradedUnit = upgrade.Upgrade();
             Units[indexOfUnitToBeUpgraded] = upgradedUnit;
+        }
+        
+        public void ListUnits()
+        {
+            foreach (var unit in Units)
+            {
+                Console.WriteLine(unit);
+            }
         }
 
         #endregion

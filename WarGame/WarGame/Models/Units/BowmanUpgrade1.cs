@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    class BowmanUpgrade1<T> :DecoratorUnit<T> where T : Farmer
+    class BowmanUpgrade1 :DecoratorUnit
     {
         public override void Attack()
         {

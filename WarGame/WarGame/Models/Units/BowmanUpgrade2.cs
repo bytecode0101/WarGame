@@ -7,7 +7,7 @@ using WarGame.Models.Units;
 
 namespace WarGame.Models.Units
 {
-    class BowmanUpgrade2<T>:DecoratorUnit<T> where T: BowmanUpgrade1<Farmer>
+    class BowmanUpgrade2:DecoratorUnit
     {
         public override void Attack()
         {

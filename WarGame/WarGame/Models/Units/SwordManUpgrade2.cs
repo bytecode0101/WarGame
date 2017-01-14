@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    class SwordManUpgrade2<T> : DecoratorUnit<T> where T: SwordManUpgrade1<Farmer>
+    class SwordManUpgrade2 : DecoratorUnit
     {
+
+        public SwordManUpgrade2(SwordManUpgrade1 unit) 
+        {
+            Unit = unit;
+        }
 
         public override void Attack()
         {
