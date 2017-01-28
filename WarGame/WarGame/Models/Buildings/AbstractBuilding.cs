@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using WarGame.Models.Capabilities;
-
+using WarGame.Models.Events;
 
 namespace WarGame.Models.Buildings
 {
@@ -13,6 +13,12 @@ namespace WarGame.Models.Buildings
         private Point position;
         protected List<AbstractBuildCapability> buildCapabilities = new List<AbstractBuildCapability>();
         protected List<AbstractTrainCapability> trainCapabilities = new List<AbstractTrainCapability>();
+        protected int progress;
+        #region Events
+
+        public event UnderConstruction UnderConstructionEvent;
+
+        #endregion
 
         public int Life
         {
@@ -95,6 +101,20 @@ namespace WarGame.Models.Buildings
             if (PropertyChanged!=null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
+        public void StartBuilding()
+        {
+            Game.Instance.NewTurnEvent += Instance_NewTurnEvent;
+        }
+
+        private void Instance_NewTurnEvent(Game sender, NewTurnArgs args)
+        {
+            if (life < 100)
+            {
+                life += progress;
+                UnderConstructionEvent?.Invoke(sender, new ContructionArgs() { Percentage = life });
             }
         }
 

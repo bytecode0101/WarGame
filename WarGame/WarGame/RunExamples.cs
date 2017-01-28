@@ -14,7 +14,7 @@ namespace WarGame
 
         static void Init()
         {
-            game = new Game();
+            game = Game.Instance;
             game.Load("SavedGames\\game1.txt");
         }
 
@@ -50,12 +50,17 @@ namespace WarGame
         public static void Run()
         {
             //SimpleGameExample();
+
+            GatheringResources();
+            BuildBarrack();
+        }
+
+        private static void BuildBarrack()
+        {
             Player player1 = new Player();
 
             player1.Build(new BuildBarrackCapability());
             player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
-
-            GatheringResources();
         }
 
         private static void GatheringResources()
@@ -75,7 +80,7 @@ namespace WarGame
             var farmer = player1.Units[0] as Farmer;
             if (farmer!=null)
             {
-                player1.UpgradeUnit(new SwordManUpgrade1(farmer));
+                player1.TrainUnit(new SwordManUpgrade1(farmer));
             }
 
             player1.ListUnits();
@@ -83,7 +88,7 @@ namespace WarGame
             var swordman = player1.Units[0] as SwordManUpgrade1;
             if (swordman != null)
             {
-                player1.UpgradeUnit(new SwordManUpgrade2(swordman));
+                player1.TrainUnit(new SwordManUpgrade2(swordman));
             }
 
             player1.ListUnits();
@@ -95,6 +100,8 @@ namespace WarGame
             //                        };
             //player1.Map = new Map
         }
+
+
 
         private static void UpgradeExample()
         {

@@ -1,6 +1,6 @@
 ﻿namespace WarGame.Models.Buildings
 {
-    class BuildingWrapper
+    public class BuildingWrapper
     {
         private AbstractBuilding building;
 

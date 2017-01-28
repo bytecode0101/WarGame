@@ -189,11 +189,17 @@ namespace WarGame.Models
                 if (!capabilityExists)
                     TrainCapabilities.Add(capability);
             }
+
+
+            wrapper.Building.UnderConstructionEvent += (sender, args)=>{ Console.WriteLine("Built " + args.Percentage); };
+
+            wrapper.Building.StartBuilding();
         }
 
-        public void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
+        public void Build(AbstractBuildCapability buildCapability, DecoratorBuilding building = null)
         {
             var newbuilding = buildCapability.Build(building);
+            BuildingWrapper wrapper = new BuildingWrapper(newbuilding);
             if (building == null)
             {
                 AddBuilding(newbuilding);
@@ -215,11 +221,16 @@ namespace WarGame.Models
 
         }
 
-        public void UpgradeUnit(DecoratorUnit upgrade)
+        public void TrainUnit(DecoratorUnit upgrade)
         {
             var indexOfUnitToBeUpgraded = Units.IndexOf(upgrade.Unit);
             var upgradedUnit = upgrade.Upgrade();
             Units[indexOfUnitToBeUpgraded] = upgradedUnit;
+        }
+
+        public void TrainUnitCommand(AbstractUnit unit)
+        {
+
         }
         
         public void ListUnits()
