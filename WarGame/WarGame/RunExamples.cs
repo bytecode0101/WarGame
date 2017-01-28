@@ -50,10 +50,10 @@ namespace WarGame
         public static void Run()
         {
             //SimpleGameExample();
-            //Player player1 = new Player();
+            Player player1 = new Player();
 
-            //player1.Build(new BuildBarrackCapability());
-            //player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
+            player1.Build(new BuildBarrackCapability());
+            player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
 
             GatheringResources();
         }

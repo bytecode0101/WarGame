@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WarGame.Models.Buildings.AbstractBuilding" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAQAAAAEAgYAAgJAAAgAAAAAAAAAAAAAABAgA=</HashCode>
+      <FileName>Models\Buildings\AbstractBuilding.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WarGame.Models.Buildings.Barrack" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Buildings\Barrack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Buildings.BarrackLevel1" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Buildings\BarrackLevel1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Buildings.BarrackLevel2" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Buildings\BarrackLevel2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Buildings.BowWorkshop" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Buildings\BowWorkshop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Buildings.DecoratorBuilding" Collapsed="true">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Buildings\DecoratorBuilding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Buildings.Farm" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Buildings\Farm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Buildings.Warehouse" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAACAAAAAgAAAAAAAAAAAAAAAgAAQAAAA=</HashCode>
+      <FileName>Models\Buildings\Warehouse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

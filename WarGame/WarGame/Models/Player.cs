@@ -14,7 +14,7 @@ namespace WarGame.Models
         private Dictionary<Resource, int> resources;
         private Pawn pawn;
                
-        private List<BuildingWrapper> buildingWrappers; 
+        private List<AbstractBuilding> buildings; 
         private List<AbstractBuildCapability> buildCapabilities; 
         private List<AbstractTrainCapability> trainCapabilities; 
         private List<AbstractUnit> units; 
@@ -102,16 +102,16 @@ namespace WarGame.Models
             }
         }
 
-        internal List<BuildingWrapper> BuildingWrappers
+        public List<AbstractBuilding> Buildings
         {
             get
             {
-                return buildingWrappers;
+                return buildings;
             }
 
             set
             {
-                buildingWrappers = value;
+                buildings = value;
             }
         }
 
@@ -125,10 +125,10 @@ namespace WarGame.Models
             //Map = new Map();
             Resources = new Dictionary<Resource, int>();
             Units = new List<AbstractUnit>();
-            BuildingWrappers = new List<BuildingWrapper>();
+            Buildings = new List<AbstractBuilding>();
             TrainCapabilities = new List<AbstractTrainCapability>();
             BuildCapabilities = new List<AbstractBuildCapability>();
-            AddBuilding(new BuildingWrapper(new Farm(0, 0, 100)));
+            AddBuilding(new Farm(0, 0, 100));
             Pawn = new Pawn();
             Pawn.GatherEvent += Pawn_GatherEvent; 
         }
@@ -159,12 +159,12 @@ namespace WarGame.Models
             Units.Add(unit);
         }
 
-        private void AddBuilding(BuildingWrapper wrapper)
+        private void AddBuilding(AbstractBuilding building)
         {
-            BuildingWrappers.Add(wrapper);
+            Buildings.Add(building);
 
             bool capabilityExists = false;
-            foreach (var capability in wrapper.Building.BuildCapabilities)
+            foreach (var capability in building.BuildCapabilities)
             {
                 capabilityExists = false;
                 foreach (var bcapability in BuildCapabilities)
@@ -177,7 +177,7 @@ namespace WarGame.Models
                     BuildCapabilities.Add(capability);
             }
 
-            foreach (var capability in wrapper.Building.TrainCapabilities)
+            foreach (var capability in building.TrainCapabilities)
             {
                 capabilityExists = false;
                 foreach (var bcapability in BuildCapabilities)
@@ -194,21 +194,14 @@ namespace WarGame.Models
         public void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
         {
             var newbuilding = buildCapability.Build(building);
-            BuildingWrapper wrapper = new BuildingWrapper(newbuilding);
             if (building == null)
             {
-                AddBuilding(wrapper);
+                AddBuilding(newbuilding);
             }
             else
             {
-                foreach(var bWrapper in BuildingWrappers)
-                {
-                    if (bWrapper.Building == building)
-                    {
-                        bWrapper.Building = newbuilding;
-                        break;
-                    }
-                }
+                Buildings.Remove(building);
+                Buildings.Add(newbuilding);
             }
         }
         
