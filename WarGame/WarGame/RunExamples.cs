@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using WarGame.Models;
 using WarGame.Models.Buildings;
 using WarGame.Models.Capabilities;
@@ -61,6 +62,11 @@ namespace WarGame
 
             player1.Build(new BuildBarrackCapability());
             player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
+
+
+            Thread.Sleep(3000);
+            //////
+            player1.AttackBuilding(player1.Buildings[1]);
         }
 
         private static void BuildUnits()

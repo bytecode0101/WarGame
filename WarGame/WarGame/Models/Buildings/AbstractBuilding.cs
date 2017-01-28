@@ -17,6 +17,7 @@ namespace WarGame.Models.Buildings
         #region Events
 
         public event UnderConstruction UnderConstructionEvent;
+        public event UnderAttack UnderAttackEvent;
 
         #endregion
 
@@ -104,12 +105,27 @@ namespace WarGame.Models.Buildings
             }
         }
 
-        public void StartBuilding()
+        public void Attack(int strength)
         {
-            Game.Instance.NewTurnEvent += Instance_NewTurnEvent;
+            if (life > 0)
+            {
+                life -= strength;
+                UnderAttackEvent?.Invoke(this, new UnderAttackArgs());
+            }
+
         }
 
-        private void Instance_NewTurnEvent(Game sender, NewTurnArgs args)
+        public void StartBuilding()
+        {
+            Game.Instance.NewTurnEvent += UnderContructionProgress;
+        }
+
+        private void UnderAttackProgress(Game sender, NewTurnArgs args)
+        {
+           
+        }
+
+        private void UnderContructionProgress(Game sender, NewTurnArgs args)
         {
             if (life < 100)
             {

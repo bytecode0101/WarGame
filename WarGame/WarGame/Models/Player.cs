@@ -194,6 +194,15 @@ namespace WarGame.Models
             building.UnderConstructionEvent += (sender, args)=>{ Console.WriteLine("Built " + args.Percentage); };
 
             building.StartBuilding();
+
+            
+        }
+
+
+        public void AttackBuilding(AbstractBuilding building)
+        {
+            building.UnderAttackEvent += (sender, args) => { Console.WriteLine("Building is under attack. Current life {0}", building.Life);};
+            building.Attack(20);
         }
 
         public void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
@@ -205,11 +214,17 @@ namespace WarGame.Models
             }
             else
             {
-                Buildings.Remove(building);
+                RemoveBuilding(building);
                 Buildings.Add(newbuilding);
             }
         }
-        
+
+        private void RemoveBuilding(AbstractBuilding building)
+        {
+                //TO DO:unsubscribe from events
+                Buildings.Remove(building);
+        }
+
         public void Attack(int x, int y)
         {
 
