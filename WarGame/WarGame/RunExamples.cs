@@ -51,7 +51,7 @@ namespace WarGame
         {
             //SimpleGameExample();
 
-            GatheringResources();
+            BuildUnits();
             BuildBarrack();
         }
 
@@ -63,7 +63,7 @@ namespace WarGame
             player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
         }
 
-        private static void GatheringResources()
+        private static void BuildUnits()
         {
             Player player1 = new Player();
             AbstractUnit farmer1 = new Farmer(0, 0, 100);

@@ -92,6 +92,7 @@ namespace WarGame.Models
         private Game()
         {
             Players = new List<Player>();
+            timer = new Timer();
             timer.Interval = 200;
             timer.AutoReset = true;
             timer.Elapsed += OnNewTurn;

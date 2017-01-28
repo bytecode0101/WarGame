@@ -11,7 +11,7 @@ namespace WarGame.Models.Capabilities
     {
         public override AbstractBuilding Build(AbstractBuilding building)
         {
-            return new Barrack(0, 0, 100);
+            return new Barrack(0, 0, 0);
         }
     }
 }

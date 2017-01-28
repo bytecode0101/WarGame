@@ -191,15 +191,14 @@ namespace WarGame.Models
             }
 
 
-            wrapper.Building.UnderConstructionEvent += (sender, args)=>{ Console.WriteLine("Built " + args.Percentage); };
+            building.UnderConstructionEvent += (sender, args)=>{ Console.WriteLine("Built " + args.Percentage); };
 
-            wrapper.Building.StartBuilding();
+            building.StartBuilding();
         }
 
-        public void Build(AbstractBuildCapability buildCapability, DecoratorBuilding building = null)
+        public void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
         {
             var newbuilding = buildCapability.Build(building);
-            BuildingWrapper wrapper = new BuildingWrapper(newbuilding);
             if (building == null)
             {
                 AddBuilding(newbuilding);

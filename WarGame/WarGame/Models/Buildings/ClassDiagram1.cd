@@ -3,7 +3,7 @@
   <Class Name="WarGame.Models.Buildings.AbstractBuilding" Collapsed="true">
     <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAECAAAAQAAAAEAgYAAgJAAAgAAAAAAAAAAAAAABAgA=</HashCode>
+      <HashCode>AAECAAAAQAAAAEAgYAAgJARAgAAAAAAAAIgAAAABAgA=</HashCode>
       <FileName>Models\Buildings\AbstractBuilding.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -34,6 +34,7 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\BowWorkshop.cs</FileName>
+      <NewMemberFileName>Models\Buildings\Bowworkshop.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Buildings.DecoratorBuilding" Collapsed="true">
