@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Buildings
 {
-    abstract class DecoratorBuilding : AbstractBuilding
+    public abstract class DecoratorBuilding : AbstractBuilding
     {
         AbstractBuilding building;
 

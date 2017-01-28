@@ -8,6 +8,7 @@ namespace WarGame.Models.Buildings
         public BowWorkshop(int y, int x, int life) : base(y, x, life)
         {
             TrainCapabilities.Add(new TrainBowmanCapability());
+            progress = 10;
         }
 
         public override AbstractBuilding Upgrade()

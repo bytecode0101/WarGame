@@ -14,7 +14,7 @@ namespace WarGame.Models
         private Dictionary<Resource, int> resources;
         private Pawn pawn;
                
-        private List<BuildingWrapper> buildingWrappers; 
+        private List<AbstractBuilding> buildings; 
         private List<AbstractBuildCapability> buildCapabilities; 
         private List<AbstractTrainCapability> trainCapabilities; 
         private List<AbstractUnit> units; 
@@ -102,16 +102,16 @@ namespace WarGame.Models
             }
         }
 
-        internal List<BuildingWrapper> BuildingWrappers
+        internal List<DecoratorBuilding> Buildings
         {
             get
             {
-                return buildingWrappers;
+                return buildings;
             }
 
             set
             {
-                buildingWrappers = value;
+                buildings = value;
             }
         }
 
@@ -125,10 +125,10 @@ namespace WarGame.Models
             //Map = new Map();
             Resources = new Dictionary<Resource, int>();
             Units = new List<AbstractUnit>();
-            BuildingWrappers = new List<BuildingWrapper>();
+            Buildings = new List<DecoratorBuilding>();
             TrainCapabilities = new List<AbstractTrainCapability>();
             BuildCapabilities = new List<AbstractBuildCapability>();
-            AddBuilding(new BuildingWrapper(new Farm(0, 0, 100)));
+            //AddBuilding(new Farm(0, 0, 100));
             Pawn = new Pawn();
             Pawn.GatherEvent += Pawn_GatherEvent; 
         }
@@ -159,9 +159,9 @@ namespace WarGame.Models
             Units.Add(unit);
         }
 
-        private void AddBuilding(BuildingWrapper wrapper)
+        private void AddBuilding(AbstractBuilding wrapper)
         {
-            BuildingWrappers.Add(wrapper);
+            buildings.Add(wrapper);
 
             bool capabilityExists = false;
             foreach (var capability in wrapper.Building.BuildCapabilities)
@@ -189,19 +189,24 @@ namespace WarGame.Models
                 if (!capabilityExists)
                     TrainCapabilities.Add(capability);
             }
+
+
+            wrapper.Building.UnderConstructionEvent += (sender, args)=>{ Console.WriteLine("Built " + args.Percentage); };
+
+            wrapper.Building.StartBuilding();
         }
 
-        public void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
+        public void Build(AbstractBuildCapability buildCapability, DecoratorBuilding building = null)
         {
             var newbuilding = buildCapability.Build(building);
-            BuildingWrapper wrapper = new BuildingWrapper(newbuilding);
+
             if (building == null)
             {
-                AddBuilding(wrapper);
+                AddBuilding(newbuilding);
             }
             else
             {
-                foreach(var bWrapper in BuildingWrappers)
+                foreach(var bWrapper in Buildings)
                 {
                     if (bWrapper.Building == building)
                     {
@@ -222,11 +227,16 @@ namespace WarGame.Models
 
         }
 
-        public void UpgradeUnit(DecoratorUnit upgrade)
+        public void TrainUnit(DecoratorUnit upgrade)
         {
             var indexOfUnitToBeUpgraded = Units.IndexOf(upgrade.Unit);
             var upgradedUnit = upgrade.Upgrade();
             Units[indexOfUnitToBeUpgraded] = upgradedUnit;
+        }
+
+        public void TrainUnitCommand(AbstractUnit unit)
+        {
+
         }
         
         public void ListUnits()

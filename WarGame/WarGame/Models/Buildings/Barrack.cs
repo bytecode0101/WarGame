@@ -11,6 +11,7 @@ namespace WarGame.Models.Buildings
         {
             BuildCapabilities.Add(new BuildBowWorkshopCapability());
             TrainCapabilities.Add(new TrainSwordmanCapability());
+            progress = 10;
         }
 
         public override AbstractBuilding Upgrade()

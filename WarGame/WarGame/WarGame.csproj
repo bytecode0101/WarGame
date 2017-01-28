@@ -60,6 +60,10 @@
     <Compile Include="Models\Capabilities\TrainFarmerCapability.cs" />
     <Compile Include="Models\Capabilities\TrainSwordmanCapability.cs" />
     <Compile Include="Models\Capabilities\UpgradeBarrackCapability.cs" />
+    <Compile Include="Models\Events\ContructionArgs.cs" />
+    <Compile Include="Models\Events\ContructionEvent.cs" />
+    <Compile Include="Models\Events\NewTurn.cs" />
+    <Compile Include="Models\Events\NewTurnArgs.cs" />
     <Compile Include="Models\GatherEvent.cs" />
     <Compile Include="Models\Units\BowmanUpgrade1.cs" />
     <Compile Include="Models\Units\BowmanUpgrade2.cs" />
@@ -90,6 +94,7 @@
     <None Include="Models\ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

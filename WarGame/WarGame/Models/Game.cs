@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Timers;
 using WarGame.Models.Buildings;
+using WarGame.Models.Events;
 using WarGame.Models.Resources;
 using WarGame.Models.Units;
 
@@ -10,10 +12,21 @@ namespace WarGame.Models
 {
     public class Game
     {
+
+        #region Events
+
+        public event NewTurn NewTurnEvent;
+
+        #endregion
+
         #region Private Fields
         private List<Player> players;
         private Map map;
         private int currentTurn;
+        private Timer timer;
+        private int turnNumber = 0;
+
+        private static Game instance;
         #endregion
 
         #region Properties
@@ -58,12 +71,38 @@ namespace WarGame.Models
                 currentTurn = value;
             }
         }
+
+        public static Game Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new Game();
+                return instance;
+            }
+
+            private set
+            {
+                instance = value;
+            }
+        }
         #endregion
 
         #region Constructors
-        public Game()
+        private Game()
         {
             Players = new List<Player>();
+            timer.Interval = 200;
+            timer.AutoReset = true;
+            timer.Elapsed += OnNewTurn;
+            timer.Start();
+        }
+
+        private void OnNewTurn(object sender, ElapsedEventArgs e)
+        {
+            turnNumber++;
+            NewTurnEvent?.Invoke(this, new NewTurnArgs() { TurnNumber = turnNumber }); 
+           
         }
         #endregion
 

@@ -10,6 +10,7 @@ namespace WarGame.Models.Buildings
         {
             BuildCapabilities.Add(new BuildBarrackCapability());
             TrainCapabilities.Add(new TrainFarmerCapability());
+            progress = 20;
         }
         public AbstractUnit CreateFarmer()
         {
