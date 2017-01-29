@@ -278,12 +278,6 @@ namespace WarGame.Models
         }
 
 
-        public void AttackBuilding(AbstractBuilding building)
-        {
-            //building.UnderAttackEvent += (sender, args) => { Console.WriteLine("Building is under attack. Current life {0}", building.Life); };
-            //building.Attack(20);
-        }
-
         public void TrainUnit(DecoratorUnit upgrade)
         {
             var indexOfUnitToBeUpgraded = Units.IndexOf(upgrade.Unit);

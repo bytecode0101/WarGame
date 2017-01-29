@@ -76,7 +76,6 @@ namespace WarGame
 
             Thread.Sleep(3000);
             //////
-            player1.AttackBuilding(player1.Buildings[1]);
 
 
 
