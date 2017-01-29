@@ -11,6 +11,8 @@ namespace WarGame.Models
     public class Player
     {
         #region Private Fields
+        private static int numberOfPlayers = 0;
+
         private Map map;
         private Dictionary<Resource, int> resources;
         private Pawn pawn;
@@ -116,6 +118,8 @@ namespace WarGame.Models
             }
         }
 
+        public int Id { get; private set; }
+
 
 
         #endregion
@@ -124,6 +128,7 @@ namespace WarGame.Models
         public Player()
         {
             //Map = new Map();
+            Id = numberOfPlayers++;
             Resources = new Dictionary<Resource, int>();
             Units = new List<AbstractUnit>();
             Buildings = new List<AbstractBuilding>();

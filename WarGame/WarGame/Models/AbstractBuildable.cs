@@ -13,9 +13,13 @@ namespace WarGame.Models
         public event UnderConstruction UnderConstructionEvent;
         #endregion
 
+        #region Private Fields
+        private static int numberOfBuildables = 0;
         protected int life;
-        protected int progress;
+        protected int progress; 
+        #endregion
 
+        public int Id { get; private set; }
 
         public void StartBuilding()
         {
@@ -33,6 +37,11 @@ namespace WarGame.Models
             {
                 Game.Instance.NewTurnEvent -= UnderContructionProgress;
             }
+        }
+
+        public AbstractBuildable()
+        {
+            Id = numberOfBuildables++;
         }
     }
 }
