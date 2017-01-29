@@ -3,7 +3,7 @@
   <Class Name="WarGame.Models.Buildings.AbstractBuilding" Collapsed="true">
     <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAECAAAAQAAAAEAgYAAgJARAgAAAAAAAAIgAAAABAgA=</HashCode>
+      <HashCode>AAECAAAAQAAAgEAgYAAoJAQAgIAAAAAAAIgAAAABAgA=</HashCode>
       <FileName>Models\Buildings\AbstractBuilding.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -16,14 +16,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Buildings.BarrackLevel1" Collapsed="true">
-    <Position X="2.75" Y="3.25" Width="1.5" />
+    <Position X="4.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\BarrackLevel1.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Buildings.BarrackLevel2" Collapsed="true">
-    <Position X="0.5" Y="3.25" Width="1.5" />
+    <Position X="2.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\BarrackLevel2.cs</FileName>
@@ -38,7 +38,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Buildings.DecoratorBuilding" Collapsed="true">
-    <Position X="1.5" Y="1.75" Width="1.5" />
+    <Position X="3.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\DecoratorBuilding.cs</FileName>
@@ -57,6 +57,14 @@
       <HashCode>AAAAAAAAIAAAACAAAAAgAAAAAAAAAAAAAAAgAAQAAAA=</HashCode>
       <FileName>Models\Buildings\Warehouse.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Units.AbstractUnit" Collapsed="true">
+    <Position X="0.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAIAAAAAgIAIAIAACgIAAAQAAAAAAAAABAgA=</HashCode>
+      <FileName>Models\Units\AbstractUnit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

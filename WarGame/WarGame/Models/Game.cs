@@ -208,36 +208,36 @@ namespace WarGame.Models
                 }
             }
 
-            var noOfUnits = int.Parse(tr.ReadLine());
-            for (int i = 0; i < noOfUnits; i++)
-            {
-                var row = tr.ReadLine();
-                var cells = row.Split(',');
-                switch (cells[0])
-                {
-                    case "Farmer":
-                        {
-                            int y = int.Parse(cells[1]);
-                            int x = int.Parse(cells[2]);
-                            int life = int.Parse(cells[3]);
-                            var farmer = new Farmer(y, x, life);
-                            Player _player = new Player();
-                            _player.AddUnit(farmer);
-                            Players.Add(_player);
-                        }
-                        break;
-                    case "Swordman":
-                        {
-                            int y = int.Parse(cells[1]);
-                            int x = int.Parse(cells[2]);
-                            int life = int.Parse(cells[3]);
-                            var farmer = new Farmer(y, x, life);
-                          //TODO: upgrade the farmer, update the player
-                        }
-                        break;
-                    default:
-                        break;
-                }
+            //var noOfUnits = int.Parse(tr.ReadLine());
+            //for (int i = 0; i < noOfUnits; i++)
+            //{
+            //    var row = tr.ReadLine();
+            //    var cells = row.Split(',');
+            //    switch (cells[0])
+            //    {
+            //        case "Farmer":
+            //            {
+            //                int y = int.Parse(cells[1]);
+            //                int x = int.Parse(cells[2]);
+            //                int life = int.Parse(cells[3]);
+            //                var farmer = new Farmer(y, x, life);
+            //                Player _player = new Player();
+            //                _player.AddUnit(farmer);
+            //                Players.Add(_player);
+            //            }
+            //            break;
+            //        case "Swordman":
+            //            {
+            //                int y = int.Parse(cells[1]);
+            //                int x = int.Parse(cells[2]);
+            //                int life = int.Parse(cells[3]);
+            //                var farmer = new Farmer(y, x, life);
+            //              //TODO: upgrade the farmer, update the player
+            //            }
+            //            break;
+            //        default:
+            //            break;
+            //    }
             }
 
             var noOfBuildings = int.Parse(tr.ReadLine());

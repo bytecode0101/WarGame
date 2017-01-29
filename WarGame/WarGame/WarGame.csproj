@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AbstractBuildable.cs" />
     <Compile Include="Models\Buildings\BarrackLevel2.cs" />
     <Compile Include="Models\Buildings\Barrack.cs" />
     <Compile Include="Models\Buildings\AbstractBuilding.cs" />

@@ -4,7 +4,7 @@ using WarGame.Utils;
 
 namespace WarGame.Models.Units
 {
-    public abstract class AbstractUnit : Serializable, INotifyPropertyChanged
+    public abstract class AbstractUnit : AbstractBuildable, INotifyPropertyChanged
     {
         private Guid id;
         private int life;
