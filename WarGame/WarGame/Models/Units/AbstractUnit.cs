@@ -8,7 +8,6 @@ namespace WarGame.Models.Units
     {
         private Guid id;
         private Point position;
-        private int capacity;
 
         #region Properties
         public Point Position
@@ -51,18 +50,7 @@ namespace WarGame.Models.Units
             }
         }
 
-        public int Capacity
-        {
-            get
-            {
-                return capacity;
-            }
-
-            set
-            {
-                capacity = value;
-            }
-        }
+      
         #endregion
 
         public AbstractUnit()
@@ -71,9 +59,7 @@ namespace WarGame.Models.Units
 
         public AbstractUnit(int y, int x, int life)
         {
-            Position = new Point();
-            Position.Y = y;
-            Position.X = x;
+            Position = new Point(x,y);
             Life = life;
         }
         public abstract void GatherResource(Tile argTile);

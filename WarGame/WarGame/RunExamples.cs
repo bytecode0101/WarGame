@@ -12,11 +12,13 @@ namespace WarGame
     public class RunExamples
     {
         static Game game;
-
+        static Player player1;
         static void Init()
         {
             game = Game.Instance;
-            game.Load("SavedGames\\game1.txt");
+            game.Load("SavedGames\\Map.txt");
+
+            player1 = new Player(game.Map);
         }
 
         static void SimpleGameExample()
@@ -51,14 +53,20 @@ namespace WarGame
         public static void Run()
         {
             //SimpleGameExample();
-
+            Init();
             BuildUnits();
             BuildBarrack();
+            MoveToPosition(5, 5);
+            GatherResources();
+        }
+
+        private static void MoveToPosition(int x, int y)
+        {
+            player1.Pawn.MoveToLocation(new Point(x, y));
         }
 
         private static void BuildBarrack()
         {
-            Player player1 = new Player();
 
             player1.Build(new BuildBarrackCapability());
             player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
@@ -67,16 +75,24 @@ namespace WarGame
             Thread.Sleep(3000);
             //////
             player1.AttackBuilding(player1.Buildings[1]);
+
+
+
         }
+
+        private static void GatherResources()
+        {
+            player1.Ghater();
+        }
+
+       
 
         private static void BuildUnits()
         {
-            Player player1 = new Player();
+            
             AbstractUnit farmer1 = new Farmer(0, 0, 100);
-            farmer1.Capacity = 10;
             AbstractUnit farmer2 = new Farmer(0, 0, 100);
             AbstractUnit farmer3 = new Farmer(0, 0, 100);
-            farmer3.Capacity = 10;
             player1.Units.Add(farmer1);
             player1.Units.Add(farmer2);
             player1.Units.Add(farmer3);

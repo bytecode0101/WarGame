@@ -29,12 +29,12 @@ namespace WarGame.Models
         {
             get
             {
-                return Map;
+                return map;
             }
 
             set
             {
-                Map = value;
+                map = value;
             }
         }
 
@@ -125,9 +125,9 @@ namespace WarGame.Models
         #endregion
 
         #region Constructors
-        public Player()
+        public Player(Map map)
         {
-            //Map = new Map();
+            Map = map;
             Id = numberOfPlayers++;
             Resources = new Dictionary<Resource, int>();
             Units = new List<AbstractUnit>();
@@ -143,7 +143,23 @@ namespace WarGame.Models
         {
             foreach (var unit in units)
             {
-                Resources.Add(map.GetResourcePosition(pawn.Location), unit.Capacity);
+                if (unit.GetType() == typeof(Farmer))
+                {
+                    if (Resources.ContainsKey(map.GetResourcePosition(pawn.Location)))
+                    {
+                        Resources[map.GetResourcePosition(pawn.Location)]++;
+                    }
+                    else
+                    {
+                        Resources.Add(map.GetResourcePosition(pawn.Location), 1);
+                    }
+                }
+            }
+
+            Console.WriteLine("Current Resources:");
+            foreach(var resource in Resources)
+            {
+                Console.WriteLine("{0}: {1}",resource.Key.ToString(), resource.Value);
             }
         }
 
@@ -235,8 +251,15 @@ namespace WarGame.Models
 
         public void Move(int x, int y)
         {
-
+            pawn.MoveToLocation(new Point(x, y));
         }
+
+        public void Ghater()
+        {
+            Pawn.GatherResources();
+        }
+
+
 
         public void AttackBuilding(AbstractBuilding building)
         {

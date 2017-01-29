@@ -239,7 +239,7 @@ namespace WarGame.Models
             //            break;
             //    }
             //}
-
+            /*
             var noOfBuildings = int.Parse(tr.ReadLine());
             for (int i = 0; i <noOfBuildings; i++)
             {
@@ -269,6 +269,7 @@ namespace WarGame.Models
                         break;
                 }
             }
+            */
         }
         #endregion
     }

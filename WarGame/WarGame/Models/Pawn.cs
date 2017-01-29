@@ -39,5 +39,12 @@ namespace WarGame.Models
 
             System.Console.WriteLine("Resources were gathered.");
         }
+
+        public void GatherResources()
+        {
+            GatherEvent?.Invoke();
+
+            System.Console.WriteLine("Resources were gathered.");
+        }
     }
 }

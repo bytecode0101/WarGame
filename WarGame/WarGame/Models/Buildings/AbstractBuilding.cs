@@ -86,9 +86,7 @@ namespace WarGame.Models.Buildings
         #region Constructors
         public AbstractBuilding(int y, int x, int life)
         {
-            Position = new Point();
-            Position.Y = y;
-            Position.X = x;
+            Position = new Point(x, y);
             Life = life;
         }
         #endregion
