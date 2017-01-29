@@ -163,7 +163,7 @@ namespace WarGame.Models
 
         private void ReadCommands()
         {
-            using (var sr = new StreamReader("SavedGames\script.txt"))
+            using (var sr = new StreamReader("SavedGames\\script.txt"))
             {
                 string cmdText;
                 while (!sr.EndOfStream)
@@ -171,18 +171,62 @@ namespace WarGame.Models
                     cmdText = sr.ReadLine();
                     var commandName = cmdText.Split(' ')[0];
                     var args = cmdText.Split(' ')[1];
+                    PlayerCommand playerCommand;
                     switch (commandName)
                     {
                         case "Move":
-                            int x;
-                            int.TryParse(args.Split(',')[0], out x);
-                            int y;
-                            int.TryParse(args.Split(',')[1], out y);
-                            var playerCommand = new PlayerCommand(() =>
                             {
-                                Move(x, y);
-                            });
-                            commands.TryAdd(playerCommand);
+                                int x;
+                                int.TryParse(args.Split(',')[0], out x);
+                                int y;
+                                int.TryParse(args.Split(',')[1], out y);
+                                playerCommand = new PlayerCommand(() =>
+                                {
+                                    Move(x, y);
+                                });
+                                commands.TryAdd(playerCommand);
+                            }
+                            break;
+                        case "Gather":
+                            {
+                                playerCommand = new PlayerCommand(() =>
+                                {
+                                    Ghater();
+                                });
+                                commands.TryAdd(playerCommand);
+                            }
+                            break;
+                        case "Build":
+                            {
+                                playerCommand = new PlayerCommand(() =>
+                                {
+                                    switch (args)
+                                    {
+                                        case "Barrack":
+                                            Build(new BuildBarrackCapability());
+                                            break;
+                                        case "BowWorkshop":
+                                            Build(new BuildBowWorkshopCapability());
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                });
+                                commands.TryAdd(playerCommand);
+                            }
+                            break;
+                        case "Attack":
+                            {
+                                playerCommand = new PlayerCommand(() =>
+                                {
+                                    int unitID;
+                                    int attackStrength;
+                                    int.TryParse(args.Split(',')[0], out unitID);
+                                    int.TryParse(args.Split(',')[1], out attackStrength);
+                                    Attack(unitID, attackStrength);
+                                });
+                                commands.TryAdd(playerCommand);
+                            }
                             break;
                         default:
                             break;

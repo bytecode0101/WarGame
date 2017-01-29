@@ -71,10 +71,10 @@ namespace WarGame
         {
 
             player1.Build(new BuildBarrackCapability());
-            player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
+            //player1.Build(new UpgradeBarrackCapability(), player1.Buildings[1]);
 
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             //////
 
 
