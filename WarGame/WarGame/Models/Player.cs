@@ -140,9 +140,6 @@ namespace WarGame.Models
             {
                 Resources.Add(map.GetResourcePosition(pawn.Location), unit.Capacity);
             }
-           
-         
-
         }
 
 
@@ -198,7 +195,7 @@ namespace WarGame.Models
 
         private void Building_UnderConstructionEvent(AbstractBuildable sender, ConstructionArgs args)
         {
-            Console.WriteLine("[{0}] Built {1}",sender.GetHashCode(), args.Percentage);
+            Console.WriteLine("[{0}] Built {1} {2}",sender.GetHashCode(), args.Percentage, sender.GetType().Name);
 
             if(args.Percentage == 100)
             {

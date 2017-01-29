@@ -12,13 +12,10 @@ namespace WarGame.Models.Buildings
         public event UnderAttack UnderAttackEvent;
         #endregion
 
-        private int life;
         private Guid id;
         private Point position;
         protected List<AbstractBuildCapability> buildCapabilities = new List<AbstractBuildCapability>();
         protected List<AbstractTrainCapability> trainCapabilities = new List<AbstractTrainCapability>();
-       
-        
 
         public int Life
         {
@@ -98,7 +95,7 @@ namespace WarGame.Models.Buildings
 
         public void OnPropertyChanged(string propName)
         {
-            if (PropertyChanged!=null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
@@ -114,11 +111,11 @@ namespace WarGame.Models.Buildings
 
         }
 
-       
+
 
         private void UnderAttackProgress(Game sender, NewTurnArgs args)
         {
-           
+
         }
 
         public abstract AbstractBuilding Upgrade();
