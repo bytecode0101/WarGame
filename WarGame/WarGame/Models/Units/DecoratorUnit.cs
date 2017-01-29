@@ -9,6 +9,8 @@ namespace WarGame.Models.Units
     public abstract class DecoratorUnit :AbstractUnit
     {
         AbstractUnit unit;
+        protected int extraLife = 50;
+        protected int extraAttack = 5;
 
         public AbstractUnit Unit
         {

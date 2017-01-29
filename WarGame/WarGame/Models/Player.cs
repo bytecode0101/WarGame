@@ -163,7 +163,7 @@ namespace WarGame.Models
 
         private void ReadCommands()
         {
-            using (var sr = new StreamReader("SavedGames\script.txt"))
+            using (var sr = new StreamReader("SavedGames\\script.txt"))
             {
                 string cmdText;
                 while (!sr.EndOfStream)
@@ -183,6 +183,32 @@ namespace WarGame.Models
                                 Move(x, y);
                             });
                             commands.TryAdd(playerCommand);
+                            break;
+                        case "Train":
+                            var playerTrainCommand = new PlayerCommand(() =>
+                            {
+                                switch (args)
+                                {
+                                    case "Farmer":
+                                        var simpleFarmer = new Farmer(0, 0, 100);
+                                        AddUnit(simpleFarmer);
+                                        break;
+                                    case "Swordman":
+                                        var swordman = new Farmer(0, 0, 100);
+                                        TrainUnit(new SwordManUpgrade1(swordman));
+                                        AddUnit(swordman);
+                                        break;
+                                    case "Bowman":
+                                        var bowman = new Farmer(0, 0, 100);
+                                        TrainUnit(new BowmanUpgrade1(bowman));
+                                        AddUnit(bowman);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                
+                            });
+                            commands.TryAdd(playerTrainCommand);
                             break;
                         default:
                             break;

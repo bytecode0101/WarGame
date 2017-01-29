@@ -9,6 +9,12 @@ namespace WarGame.Models.Units
 {
     class BowmanUpgrade2:DecoratorUnit
     {
+        public BowmanUpgrade2(BowmanUpgrade1 farmer)
+        {
+            Unit = farmer;
+            Life = farmer.Life + extraLife;
+        }
+
         public override void Attack()
         {
             throw new NotImplementedException();

@@ -8,6 +8,12 @@ namespace WarGame.Models.Units
 {
     class BowmanUpgrade1 :DecoratorUnit
     {
+        public BowmanUpgrade1(Farmer farmer)
+        {
+            Unit = farmer;
+            Life = farmer.Life + extraLife;
+        }    
+
         public override void Attack()
         {
             throw new NotImplementedException();
