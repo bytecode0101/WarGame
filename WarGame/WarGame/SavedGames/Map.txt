@@ -9,9 +9,3 @@ F,W,I,G,F,F,S,G,G,I
 F,W,I,G,F,F,S,G,G,I
 F,W,I,G,F,F,S,G,G,I
 F,W,I,G,F,F,S,G,G,I
-2
-Farmer,2,4,100
-Soldier,5,5,80
-2
-Farm,1,1,100
-Barrack,7,1,100

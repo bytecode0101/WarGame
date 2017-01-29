@@ -85,9 +85,10 @@
     <Compile Include="Utils\Serializer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SavedGames\Game1.txt">
+    <Content Include="SavedGames\Map.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="SavedGames\script.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\Buildings\ClassDiagram1.cd" />

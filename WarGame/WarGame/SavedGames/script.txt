@@ -1,0 +1,18 @@
+﻿move 2,2
+gather
+move 4,4
+gather
+move 4,5
+gather
+train Farmer
+train Farmer
+train Farmer
+train Farmer
+build Barrack
+train Swardman
+train Swardman
+train Swardman
+build BowWorkshop
+train Bowman
+move 5,5
+attack
