@@ -6,20 +6,19 @@ using WarGame.Models.Events;
 
 namespace WarGame.Models.Buildings
 {
-    public abstract class AbstractBuilding : INotifyPropertyChanged
+    public abstract class AbstractBuilding : AbstractBuildable, INotifyPropertyChanged
     {
+        #region Events
+        public event UnderAttack UnderAttackEvent;
+        #endregion
+
         private int life;
         private Guid id;
         private Point position;
         protected List<AbstractBuildCapability> buildCapabilities = new List<AbstractBuildCapability>();
         protected List<AbstractTrainCapability> trainCapabilities = new List<AbstractTrainCapability>();
-        protected int progress;
-        #region Events
-
-        public event UnderConstruction UnderConstructionEvent;
-        public event UnderAttack UnderAttackEvent;
-
-        #endregion
+       
+        
 
         public int Life
         {
@@ -115,27 +114,11 @@ namespace WarGame.Models.Buildings
 
         }
 
-        public void StartBuilding()
-        {
-            Game.Instance.NewTurnEvent += UnderContructionProgress;
-        }
+       
 
         private void UnderAttackProgress(Game sender, NewTurnArgs args)
         {
            
-        }
-
-        private void UnderContructionProgress(Game sender, NewTurnArgs args)
-        {
-            if (life < 100)
-            {
-                life += progress;
-                UnderConstructionEvent?.Invoke(sender, new ContructionArgs() { Percentage = life });
-            }
-            else
-            {
-                Game.Instance.NewTurnEvent -= UnderContructionProgress;
-            }
         }
 
         public abstract AbstractBuilding Upgrade();

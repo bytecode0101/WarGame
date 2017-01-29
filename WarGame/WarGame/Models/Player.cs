@@ -193,13 +193,10 @@ namespace WarGame.Models
 
 
             building.UnderConstructionEvent += Building_UnderConstructionEvent; 
-
             building.StartBuilding();
-
-            
         }
 
-        private void Building_UnderConstructionEvent(AbstractBuilding sender, ConstructionArgs args)
+        private void Building_UnderConstructionEvent(AbstractBuildable sender, ConstructionArgs args)
         {
             Console.WriteLine("[{0}] Built {1}",sender.GetHashCode(), args.Percentage);
 

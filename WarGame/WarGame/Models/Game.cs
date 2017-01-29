@@ -238,10 +238,10 @@ namespace WarGame.Models
             //        default:
             //            break;
             //    }
-            }
+            //}
 
             var noOfBuildings = int.Parse(tr.ReadLine());
-            for (int i = 0; i < noOfUnits; i++)
+            for (int i = 0; i <noOfBuildings; i++)
             {
                 var row = tr.ReadLine();
                 var cells = row.Split(',');

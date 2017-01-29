@@ -7,7 +7,6 @@ namespace WarGame.Models.Units
     public abstract class AbstractUnit : AbstractBuildable, INotifyPropertyChanged
     {
         private Guid id;
-        private int life;
         private Point position;
         private int capacity;
 
