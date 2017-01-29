@@ -61,12 +61,13 @@
     <Compile Include="Models\Capabilities\TrainSwordmanCapability.cs" />
     <Compile Include="Models\Capabilities\UpgradeBarrackCapability.cs" />
     <Compile Include="Models\Events\UnderAttackArgs.cs" />
-    <Compile Include="Models\Events\ContructionArgs.cs" />
-    <Compile Include="Models\Events\ContructionEvent.cs" />
+    <Compile Include="Models\Events\ConstructionArgs.cs" />
+    <Compile Include="Models\Events\ConstructionEvent.cs" />
     <Compile Include="Models\Events\NewTurn.cs" />
     <Compile Include="Models\Events\NewTurnArgs.cs" />
     <Compile Include="Models\Events\UnderAttack.cs" />
     <Compile Include="Models\GatherEvent.cs" />
+    <Compile Include="Models\ITurnBasedComponent.cs" />
     <Compile Include="Models\Units\BowmanUpgrade1.cs" />
     <Compile Include="Models\Units\BowmanUpgrade2.cs" />
     <Compile Include="Models\Units\DecoratorUnit.cs" />

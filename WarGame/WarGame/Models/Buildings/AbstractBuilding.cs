@@ -130,8 +130,13 @@ namespace WarGame.Models.Buildings
             if (life < 100)
             {
                 life += progress;
-                UnderConstructionEvent?.Invoke(sender, new ContructionArgs() { Percentage = life });
+                UnderConstructionEvent?.Invoke(this, new ConstructionArgs() { Percentage = life });
             }
+            else
+            {
+                Game.Instance.NewTurnEvent -= UnderContructionProgress;
+            }
+        
         }
 
         public abstract AbstractBuilding Upgrade();

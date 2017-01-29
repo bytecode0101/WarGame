@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WarGame.Models.Events
+namespace WarGame.Models
 {
-    public delegate void UnderConstruction(Game sender, ContructionArgs args);
+    interface ITurnBasedComponent
+    {
+    }
 }

@@ -4,6 +4,7 @@ using WarGame.Models.Resources;
 using WarGame.Models.Units;
 using WarGame.Models.Capabilities;
 using System;
+using WarGame.Models.Events;
 
 namespace WarGame.Models
 {
@@ -191,18 +192,21 @@ namespace WarGame.Models
             }
 
 
-            building.UnderConstructionEvent += (sender, args)=>{ Console.WriteLine("Built " + args.Percentage); };
+            building.UnderConstructionEvent += Building_UnderConstructionEvent; 
 
             building.StartBuilding();
 
             
         }
 
-
-        public void AttackBuilding(AbstractBuilding building)
+        private void Building_UnderConstructionEvent(AbstractBuilding sender, ConstructionArgs args)
         {
-            building.UnderAttackEvent += (sender, args) => { Console.WriteLine("Building is under attack. Current life {0}", building.Life);};
-            building.Attack(20);
+            Console.WriteLine("[{0}] Built {1}",sender.GetHashCode(), args.Percentage);
+
+            if(args.Percentage == 100)
+            {
+                sender.UnderConstructionEvent -= Building_UnderConstructionEvent;
+            }
         }
 
         public void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
@@ -233,6 +237,12 @@ namespace WarGame.Models
         public void Move(int x, int y)
         {
 
+        }
+
+        public void AttackBuilding(AbstractBuilding building)
+        {
+            building.UnderAttackEvent += (sender, args) => { Console.WriteLine("Building is under attack. Current life {0}", building.Life); };
+            building.Attack(20);
         }
 
         public void TrainUnit(DecoratorUnit upgrade)
