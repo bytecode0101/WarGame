@@ -1,4 +1,5 @@
-﻿Move 2,2
+﻿Train Farmer
+Move 2,2
 Gather
 Move 4,4
 Gather
@@ -9,10 +10,8 @@ Train Farmer
 Train Farmer
 Train Farmer
 Build Barrack
-Train Swordman
-Train Swordman
-Train Swordman
+Train Swordman,0
 Build BowWorkshop
-Train Bowman
+Train Bowman,1
 Move 5,5
-Attack 0
+Attack 0, 20

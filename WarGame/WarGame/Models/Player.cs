@@ -157,11 +157,10 @@ namespace WarGame.Models
             Pawn = new Pawn();
             Pawn.GatherEvent += Pawn_GatherEvent;
 
-            ReadCommands();
-            ExecuteCommands();
+
         }
 
-        private void ReadCommands()
+        public void ReadCommands()
         {
             using (var sr = new StreamReader("SavedGames\\script.txt"))
             {
@@ -170,7 +169,9 @@ namespace WarGame.Models
                 {
                     cmdText = sr.ReadLine();
                     var commandName = cmdText.Split(' ')[0];
-                    var args = cmdText.Split(' ')[1];
+                    string args = "";
+                    if(cmdText.Contains(" "))
+                        args = cmdText.Split(' ')[1];
                     PlayerCommand playerCommand;
                     switch (commandName)
                     {
@@ -205,9 +206,9 @@ namespace WarGame.Models
                                         case "Barrack":
                                             Build(new BuildBarrackCapability());
                                             break;
-                                        case "BowWorkshop":
-                                            Build(new BuildBowWorkshopCapability());
-                                            break;
+                                        //case "BowWorkshop":
+                                        //    Build(new BuildBowWorkshopCapability());
+                                       //     break;
                                         default:
                                             break;
                                     }
@@ -231,21 +232,46 @@ namespace WarGame.Models
                         case "Train":
                             var playerTrainCommand = new PlayerCommand(() =>
                             {
-                                switch (args)
+                                string unitType = "";
+                                int unitID=0;
+                                if (args.Contains(","))
+                                {
+                                    unitType = args.Split(',')[0];
+                                    int.TryParse(args.Split(',')[1], out unitID);
+                                }
+                                else
+                                {
+                                    unitType = args;
+                                }
+                                switch (unitType)
                                 {
                                     case "Farmer":
                                         var simpleFarmer = new Farmer(0, 0, 100);
                                         AddUnit(simpleFarmer);
                                         break;
                                     case "Swordman":
-                                        var swordman = new Farmer(0, 0, 100);
-                                        TrainUnit(new SwordManUpgrade1(swordman));
-                                        AddUnit(swordman);
+                                        //var swordman = new Farmer(0, 0, 100);
+                                        var unit = Buildables[unitID] as Farmer;
+                                        if (unit != null)
+                                        {
+                                            TrainUnit(new SwordManUpgrade1(unit));
+                                        }
+                                        else
+                                        {
+                                            //TODO: throw exeception
+                                        }
                                         break;
                                     case "Bowman":
-                                        var bowman = new Farmer(0, 0, 100);
-                                        TrainUnit(new BowmanUpgrade1(bowman));
-                                        AddUnit(bowman);
+                                        //var swordman = new Farmer(0, 0, 100);
+                                        var unit1 = Buildables[unitID] as Farmer;
+                                        if (unit1 != null)
+                                        {
+                                            TrainUnit(new BowmanUpgrade1(unit1));
+                                        }
+                                        else
+                                        {
+                                            //TODO: throw exeception
+                                        }
                                         break;
                                     default:
                                         break;
@@ -261,7 +287,7 @@ namespace WarGame.Models
             }
         }
 
-        private void ExecuteCommands()
+        public void ExecuteCommands()
         {
             while (true)
             {

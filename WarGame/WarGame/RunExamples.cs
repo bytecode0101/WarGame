@@ -54,12 +54,15 @@ namespace WarGame
         {
             //SimpleGameExample();
             Init();
-            BuildUnits();
-            BuildBarrack();
-            MoveToPosition(5, 5);
-            GatherResources();
-            player1.Attack(0, 20);
-            player1.Attack(1, 20);
+            player1.ReadCommands();
+            player1.ExecuteCommands();
+            //BuildUnits();
+            //BuildBarrack();
+            //MoveToPosition(5, 5);
+            // GatherResources();
+            // player1.Attack(0, 20);
+            //player1.Attack(1, 20);
+            // player1.ReadCommands();
         }
 
         private static void MoveToPosition(int x, int y)
