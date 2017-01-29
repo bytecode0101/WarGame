@@ -16,7 +16,8 @@ namespace WarGame.Models
         private Map map;
         private Dictionary<Resource, int> resources;
         private Pawn pawn;
-               
+
+        private Dictionary<int,AbstractBuildable> buildables;       
         private List<AbstractBuilding> buildings; 
         private List<AbstractBuildCapability> buildCapabilities; 
         private List<AbstractTrainCapability> trainCapabilities; 
@@ -50,7 +51,6 @@ namespace WarGame.Models
                 resources = value;
             }
         }
-
 
 
         public List<AbstractUnit> Units
@@ -120,6 +120,19 @@ namespace WarGame.Models
 
         public int Id { get; private set; }
 
+        public Dictionary<int, AbstractBuildable> Buildables
+        {
+            get
+            {
+                return buildables;
+            }
+
+            set
+            {
+                buildables = value;
+            }
+        }
+
 
 
         #endregion
@@ -131,6 +144,7 @@ namespace WarGame.Models
             Id = numberOfPlayers++;
             Resources = new Dictionary<Resource, int>();
             Units = new List<AbstractUnit>();
+            Buildables = new Dictionary<int, AbstractBuildable>();
             Buildings = new List<AbstractBuilding>();
             TrainCapabilities = new List<AbstractTrainCapability>();
             BuildCapabilities = new List<AbstractBuildCapability>();
@@ -176,11 +190,14 @@ namespace WarGame.Models
         public void AddUnit(AbstractUnit unit)
         {
             Units.Add(unit);
+            Buildables.Add(unit.Id, unit);
+            
         }
 
         private void AddBuilding(AbstractBuilding building)
         {
             Buildings.Add(building);
+            Buildables.Add(building.Id, building);
 
             bool capabilityExists = false;
             foreach (var capability in building.BuildCapabilities)
@@ -244,9 +261,10 @@ namespace WarGame.Models
                 Buildings.Remove(building);
         }
 
-        public void Attack(int x, int y)
+        public void Attack(int buildableId, int attackStrength)
         {
-
+            Buildables[buildableId].UnderAttackEvent += (sender, args) => { Console.WriteLine("[{0} - {1}] Buildable is under attack. Current life {2}", sender.Id ,sender.GetType().Name, sender.Life); };
+            Buildables[buildableId].Attack(attackStrength);
         }
 
         public void Move(int x, int y)
@@ -260,11 +278,10 @@ namespace WarGame.Models
         }
 
 
-
         public void AttackBuilding(AbstractBuilding building)
         {
-            building.UnderAttackEvent += (sender, args) => { Console.WriteLine("Building is under attack. Current life {0}", building.Life); };
-            building.Attack(20);
+            //building.UnderAttackEvent += (sender, args) => { Console.WriteLine("Building is under attack. Current life {0}", building.Life); };
+            //building.Attack(20);
         }
 
         public void TrainUnit(DecoratorUnit upgrade)
@@ -272,6 +289,8 @@ namespace WarGame.Models
             var indexOfUnitToBeUpgraded = Units.IndexOf(upgrade.Unit);
             var upgradedUnit = upgrade.Upgrade();
             Units[indexOfUnitToBeUpgraded] = upgradedUnit;
+            upgradedUnit.Id = upgrade.Unit.Id;
+            Buildables[upgrade.Unit.Id] = upgradedUnit;
         }
 
         public void TrainUnitCommand(AbstractUnit unit)

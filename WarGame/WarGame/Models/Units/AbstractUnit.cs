@@ -6,7 +6,7 @@ namespace WarGame.Models.Units
 {
     public abstract class AbstractUnit : AbstractBuildable, INotifyPropertyChanged
     {
-        private Guid id;
+
         private Point position;
 
         #region Properties
@@ -23,29 +23,18 @@ namespace WarGame.Models.Units
             }
         }
 
-        public Guid Id
-        {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
-        }
+        
 
         public int Life
         {
             get
             {
-                return life;
+                return base.Life;
             }
 
             set
             {
-                life = value;
+                base.Life = value;
                 OnPropertyChanged("Life");
             }
         }

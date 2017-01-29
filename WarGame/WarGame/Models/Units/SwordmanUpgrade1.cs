@@ -14,6 +14,7 @@ namespace WarGame.Models.Units
         public SwordManUpgrade1(Farmer farmer)
         {
             Unit = farmer;
+            Life = farmer.Life + extraLife;
         }
 
         public override void Attack()

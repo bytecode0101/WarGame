@@ -58,6 +58,8 @@ namespace WarGame
             BuildBarrack();
             MoveToPosition(5, 5);
             GatherResources();
+            player1.Attack(0, 20);
+            player1.Attack(1, 20);
         }
 
         private static void MoveToPosition(int x, int y)
@@ -93,9 +95,9 @@ namespace WarGame
             AbstractUnit farmer1 = new Farmer(0, 0, 100);
             AbstractUnit farmer2 = new Farmer(0, 0, 100);
             AbstractUnit farmer3 = new Farmer(0, 0, 100);
-            player1.Units.Add(farmer1);
-            player1.Units.Add(farmer2);
-            player1.Units.Add(farmer3);
+            player1.AddUnit(farmer1);
+            player1.AddUnit(farmer2);
+            player1.AddUnit(farmer3);
 
             player1.ListUnits();
 

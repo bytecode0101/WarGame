@@ -8,39 +8,25 @@ namespace WarGame.Models.Buildings
 {
     public abstract class AbstractBuilding : AbstractBuildable, INotifyPropertyChanged
     {
-        #region Events
-        public event UnderAttack UnderAttackEvent;
-        #endregion
 
-        private Guid id;
+
         private Point position;
         protected List<AbstractBuildCapability> buildCapabilities = new List<AbstractBuildCapability>();
         protected List<AbstractTrainCapability> trainCapabilities = new List<AbstractTrainCapability>();
 
-        public int Life
-        {
-            get
-            {
-                return life;
-            }
+        //public int Life
+        //{
+        //    get
+        //    {
+        //        return life;
+        //    }
 
-            set
-            {
-                life = value;
-            }
-        }
-        public Guid Id
-        {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
-        }
+        //    set
+        //    {
+        //        life = value;
+        //    }
+        //}
+       
 
         public Point Position
         {
@@ -99,22 +85,10 @@ namespace WarGame.Models.Buildings
             }
         }
 
-        public void Attack(int strength)
-        {
-            if (life > 0)
-            {
-                life -= strength;
-                UnderAttackEvent?.Invoke(this, new UnderAttackArgs());
-            }
-
-        }
 
 
 
-        private void UnderAttackProgress(Game sender, NewTurnArgs args)
-        {
 
-        }
 
         public abstract AbstractBuilding Upgrade();
     }

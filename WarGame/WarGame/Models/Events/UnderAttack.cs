@@ -7,5 +7,5 @@ using WarGame.Models.Buildings;
 
 namespace WarGame.Models.Events
 {
-    public delegate void UnderAttack(object sender, UnderAttackArgs args);
+    public delegate void UnderAttack(AbstractBuildable sender, UnderAttackArgs args);
 }
