@@ -16,11 +16,3 @@ build BowWorkshop
 train Bowman
 move 5,5
 attack
-
-// 
--Move(int x, int y)
--Gather()
--Attack(int targetId, int attackStrength)
--Build
--Upgrade
--Train

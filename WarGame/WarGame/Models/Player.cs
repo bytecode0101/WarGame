@@ -5,6 +5,9 @@ using WarGame.Models.Units;
 using WarGame.Models.Capabilities;
 using System;
 using WarGame.Models.Events;
+using System.Collections.Concurrent;
+using WarGame.Models.Commands;
+using System.IO;
 
 namespace WarGame.Models
 {
@@ -17,11 +20,13 @@ namespace WarGame.Models
         private Dictionary<Resource, int> resources;
         private Pawn pawn;
 
-        private Dictionary<int,AbstractBuildable> buildables;       
-        private List<AbstractBuilding> buildings; 
-        private List<AbstractBuildCapability> buildCapabilities; 
-        private List<AbstractTrainCapability> trainCapabilities; 
-        private List<AbstractUnit> units; 
+        private Dictionary<int, AbstractBuildable> buildables;
+        private List<AbstractBuilding> buildings;
+        private List<AbstractBuildCapability> buildCapabilities;
+        private List<AbstractTrainCapability> trainCapabilities;
+        private List<AbstractUnit> units;
+
+        BlockingCollection<ICommand> commands = new BlockingCollection<ICommand>();
 
         #endregion
 
@@ -39,7 +44,7 @@ namespace WarGame.Models
             }
         }
 
-        public Dictionary<Resource,int> Resources
+        public Dictionary<Resource, int> Resources
         {
             get
             {
@@ -150,7 +155,53 @@ namespace WarGame.Models
             BuildCapabilities = new List<AbstractBuildCapability>();
             AddBuilding(new Farm(0, 0, 100));
             Pawn = new Pawn();
-            Pawn.GatherEvent += Pawn_GatherEvent; 
+            Pawn.GatherEvent += Pawn_GatherEvent;
+
+            ReadCommands();
+            ExecuteCommands();
+        }
+
+        private void ReadCommands()
+        {
+            using (var sr = new StreamReader("SavedGames\script.txt"))
+            {
+                string cmdText;
+                while (!sr.EndOfStream)
+                {
+                    cmdText = sr.ReadLine();
+                    var commandName = cmdText.Split(' ')[0];
+                    var args = cmdText.Split(' ')[1];
+                    switch (commandName)
+                    {
+                        case "Move":
+                            int x;
+                            int.TryParse(args.Split(',')[0], out x);
+                            int y;
+                            int.TryParse(args.Split(',')[1], out y);
+                            var playerCommand = new PlayerCommand(() =>
+                            {
+                                Move(x, y);
+                            });
+                            commands.TryAdd(playerCommand);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void ExecuteCommands()
+        {
+            while (true)
+            {
+                ICommand command;
+                commands.TryTake(out command);
+                if (command != null)
+                {
+                    command.Execute();
+                }
+            }
         }
 
         private void Pawn_GatherEvent()
@@ -171,9 +222,9 @@ namespace WarGame.Models
             }
 
             Console.WriteLine("Current Resources:");
-            foreach(var resource in Resources)
+            foreach (var resource in Resources)
             {
-                Console.WriteLine("{0}: {1}",resource.Key.ToString(), resource.Value);
+                Console.WriteLine("{0}: {1}", resource.Key.ToString(), resource.Value);
             }
         }
 
@@ -191,7 +242,7 @@ namespace WarGame.Models
         {
             Units.Add(unit);
             Buildables.Add(unit.Id, unit);
-            
+
         }
 
         private void AddBuilding(AbstractBuilding building)
@@ -227,15 +278,15 @@ namespace WarGame.Models
             }
 
 
-            building.UnderConstructionEvent += Building_UnderConstructionEvent; 
+            building.UnderConstructionEvent += Building_UnderConstructionEvent;
             building.StartBuilding();
         }
 
         private void Building_UnderConstructionEvent(AbstractBuildable sender, ConstructionArgs args)
         {
-            Console.WriteLine("[{0}] Built {1} {2}",sender.GetHashCode(), args.Percentage, sender.GetType().Name);
+            Console.WriteLine("[{0}] Built {1} {2}", sender.GetHashCode(), args.Percentage, sender.GetType().Name);
 
-            if(args.Percentage == 100)
+            if (args.Percentage == 100)
             {
                 sender.UnderConstructionEvent -= Building_UnderConstructionEvent;
             }
@@ -257,13 +308,13 @@ namespace WarGame.Models
 
         private void RemoveBuilding(AbstractBuilding building)
         {
-                //TO DO:unsubscribe from events
-                Buildings.Remove(building);
+            //TO DO:unsubscribe from events
+            Buildings.Remove(building);
         }
 
         public void Attack(int buildableId, int attackStrength)
         {
-            Buildables[buildableId].UnderAttackEvent += (sender, args) => { Console.WriteLine("[{0} - {1}] Buildable is under attack. Current life {2}", sender.Id ,sender.GetType().Name, sender.Life); };
+            Buildables[buildableId].UnderAttackEvent += (sender, args) => { Console.WriteLine("[{0} - {1}] Buildable is under attack. Current life {2}", sender.Id, sender.GetType().Name, sender.Life); };
             Buildables[buildableId].Attack(attackStrength);
         }
 
@@ -291,7 +342,7 @@ namespace WarGame.Models
         {
 
         }
-        
+
         public void ListUnits()
         {
             foreach (var unit in Units)
