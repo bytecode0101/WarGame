@@ -8,8 +8,7 @@ namespace WarGame.Models.Units
 {
     class SwordManUpgrade1 : DecoratorUnit
     {
-        private int extraLife = 50;
-        private int extraAttack = 5;
+        
 
         public SwordManUpgrade1(Farmer farmer)
         {
