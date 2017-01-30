@@ -5,13 +5,16 @@ namespace WarGame.Models.Buildings
 {
     class BarrackLevel2 : DecoratorBuilding
     {
-        public BarrackLevel2(int y, int x, int life) : base(y, x, life)
+
+        #region Constructors
+
+        public BarrackLevel2(BarrackLevel1 barrackLevel1)
         {
+            Building = barrackLevel1;
+            Id = barrackLevel1.Id;
         }
 
-        public override AbstractBuilding Upgrade()
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
+
     }
 }

@@ -51,8 +51,9 @@ namespace WarGame.Models.Units
             Position = new Point(x,y);
             Life = life;
         }
-        public abstract void GatherResource(Tile argTile);
         public abstract void Attack();
+
+
         public abstract void Move(Point destination);
 
         public event PropertyChangedEventHandler PropertyChanged;

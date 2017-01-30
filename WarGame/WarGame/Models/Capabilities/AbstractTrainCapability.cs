@@ -9,7 +9,7 @@ namespace WarGame.Models.Capabilities
 {
     public abstract class AbstractTrainCapability
     {
-        public abstract AbstractUnit Train(AbstractUnit unit);
+        public abstract AbstractUnit Train(AbstractUnit unit = null);
 
     }
 }

@@ -7,19 +7,21 @@ namespace WarGame.Models.Buildings
 {
     class Barrack : AbstractBuilding
     {
+
+        #region Constructors
+
         public Barrack(int y, int x, int life) : base(y, x, life)
         {
-            BuildCapabilities.Add(new BuildBowWorkshopCapability());
-            TrainCapabilities.Add(new TrainSwordmanCapability());
+            BuildCapabilities.Add(typeof(BuildBowWorkshopCapability), new BuildBowWorkshopCapability());
+            BuildCapabilities.Add(typeof(UpgradeBarrackCapability), new UpgradeBarrackCapability());
+            TrainCapabilities.Add(typeof(TrainSwordmanCapability), new TrainSwordmanCapability());
             progress = 10;
         }
 
-        public override AbstractBuilding Upgrade()
-        {
-            DecoratorBuilding upgradedBarrack = new BarrackLevel1(this.Position.X,this.Position.Y,100);
-            upgradedBarrack.Building = this;
+        #endregion
 
-            return upgradedBarrack;
-        }
+        #region Public Methods
+
+        #endregion
     }
 }

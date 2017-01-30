@@ -9,24 +9,41 @@ namespace WarGame.Models.Buildings
     public abstract class AbstractBuilding : AbstractBuildable, INotifyPropertyChanged
     {
 
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        public AbstractBuilding() { }
+
+        public AbstractBuilding(int y, int x, int life)
+        {
+            Position = new Point(x, y);
+            Life = life;
+        }
+
+        #endregion
+
+        #region Private fields
 
         private Point position;
-        protected List<AbstractBuildCapability> buildCapabilities = new List<AbstractBuildCapability>();
-        protected List<AbstractTrainCapability> trainCapabilities = new List<AbstractTrainCapability>();
+        private Dictionary<Type, AbstractBuildCapability> buildCapabilities = new Dictionary<Type, AbstractBuildCapability>();
+        private Dictionary<Type, AbstractTrainCapability> trainCapabilities = new Dictionary<Type, AbstractTrainCapability>();
 
-        //public int Life
-        //{
-        //    get
-        //    {
-        //        return life;
-        //    }
+        #endregion
 
-        //    set
-        //    {
-        //        life = value;
-        //    }
-        //}
-       
+        #region Properties
 
         public Point Position
         {
@@ -41,7 +58,7 @@ namespace WarGame.Models.Buildings
             }
         }
 
-        public List<AbstractBuildCapability> BuildCapabilities
+        public Dictionary<Type, AbstractBuildCapability> BuildCapabilities
         {
             get
             {
@@ -54,7 +71,7 @@ namespace WarGame.Models.Buildings
             }
         }
 
-        public List<AbstractTrainCapability> TrainCapabilities
+        public Dictionary<Type, AbstractTrainCapability> TrainCapabilities
         {
             get
             {
@@ -67,29 +84,11 @@ namespace WarGame.Models.Buildings
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #region Constructors
-        public AbstractBuilding(int y, int x, int life)
-        {
-            Position = new Point(x, y);
-            Life = life;
-        }
         #endregion
 
-        public void OnPropertyChanged(string propName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
-        }
+        #region Public Methods
 
+        #endregion
 
-
-
-
-
-        public abstract AbstractBuilding Upgrade();
     }
 }

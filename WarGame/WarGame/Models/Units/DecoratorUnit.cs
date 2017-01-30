@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    public abstract class DecoratorUnit :AbstractUnit
+    public abstract class DecoratorUnit:AbstractUnit
     {
         AbstractUnit unit;
         protected int extraLife = 50;

@@ -11,7 +11,8 @@ namespace WarGame.Models.Capabilities
     {
         public override AbstractUnit Train(AbstractUnit unit)
         {
-            return new Farmer(0,0,100);
+            var farmer = new Farmer(0, 0, 100);
+            return farmer;
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WarGame.Models.Events;
+﻿using WarGame.Models.Events;
 
 namespace WarGame.Models
 {
@@ -15,9 +10,11 @@ namespace WarGame.Models
         #endregion
 
         #region Private Fields
+
         private static int numberOfBuildables = 0;
         private int life;
         protected int progress; 
+
         #endregion
 
         public int Id { get; set; }

@@ -20,11 +20,7 @@ namespace WarGame.Models.Units
             throw new NotImplementedException();
         }
 
-        public override void GatherResource(Tile argTile)
-        {
-            throw new NotImplementedException();
-        }
-
+     
         public override void Move(Point destination)
         {
             throw new NotImplementedException();

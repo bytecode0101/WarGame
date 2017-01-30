@@ -9,9 +9,13 @@ Train Farmer
 Train Farmer
 Train Farmer
 Train Farmer
+Gather
+Gather
 Build Barrack
-Train Swordman,0
+Train Swordman,1
 Build BowWorkshop
-Train Bowman,1
+Train Bowman,2
 Move 5,5
 Attack 0, 20
+List Units
+List Buildings

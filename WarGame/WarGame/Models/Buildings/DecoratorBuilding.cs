@@ -8,11 +8,13 @@ namespace WarGame.Models.Buildings
 {
     public abstract class DecoratorBuilding : AbstractBuilding
     {
-        AbstractBuilding building;
+        #region Private Fields
 
-        public DecoratorBuilding(int y, int x, int life) : base(y, x, life)
-        {
-        }
+        private AbstractBuilding building;
+
+        #endregion
+         
+        #region Properties
 
         public AbstractBuilding Building
         {
@@ -26,5 +28,7 @@ namespace WarGame.Models.Buildings
                 building = value;
             }
         }
+
+        #endregion
     }
 }

@@ -13,6 +13,44 @@ namespace WarGame.Models
 {
     public class Player
     {
+        #region Events
+
+        private void Pawn_GatherEvent()
+        {
+            foreach (var unit in units)
+            {
+                if (unit.GetType() == typeof(Farmer))
+                {
+                    if (Resources.ContainsKey(map.GetResourcePosition(pawn.Location)))
+                    {
+                        Resources[map.GetResourcePosition(pawn.Location)]++;
+                    }
+                    else
+                    {
+                        Resources.Add(map.GetResourcePosition(pawn.Location), 1);
+                    }
+                }
+            }
+
+            Console.WriteLine("Current Resources:");
+            foreach (var resource in Resources)
+            {
+                Console.WriteLine("{0}: {1}", resource.Key.ToString(), resource.Value);
+            }
+        }
+
+        private void Building_UnderConstructionEvent(AbstractBuildable sender, ConstructionArgs args)
+        {
+            Console.WriteLine("[{0}] Built {1}% of {2}", sender.GetHashCode(), args.Percentage, sender.GetType().Name);
+
+            if (args.Percentage == 100)
+            {
+                sender.UnderConstructionEvent -= Building_UnderConstructionEvent;
+            }
+        }
+
+        #endregion
+
         #region Private Fields
         private static int numberOfPlayers = 0;
 
@@ -22,8 +60,8 @@ namespace WarGame.Models
 
         private Dictionary<int, AbstractBuildable> buildables;
         private List<AbstractBuilding> buildings;
-        private List<AbstractBuildCapability> buildCapabilities;
-        private List<AbstractTrainCapability> trainCapabilities;
+        private Dictionary<Type, AbstractBuildCapability> buildCapabilities;
+        private Dictionary<Type, AbstractTrainCapability> trainCapabilities;
         private List<AbstractUnit> units;
 
         BlockingCollection<ICommand> commands = new BlockingCollection<ICommand>();
@@ -31,6 +69,7 @@ namespace WarGame.Models
         #endregion
 
         #region Properties
+
         public Map Map
         {
             get
@@ -56,8 +95,7 @@ namespace WarGame.Models
                 resources = value;
             }
         }
-
-
+        
         public List<AbstractUnit> Units
         {
             get
@@ -70,33 +108,7 @@ namespace WarGame.Models
                 units = value;
             }
         }
-
-        public List<AbstractTrainCapability> TrainCapabilities
-        {
-            get
-            {
-                return trainCapabilities;
-            }
-
-            set
-            {
-                trainCapabilities = value;
-            }
-        }
-
-        public List<AbstractBuildCapability> BuildCapabilities
-        {
-            get
-            {
-                return buildCapabilities;
-            }
-
-            set
-            {
-                buildCapabilities = value;
-            }
-        }
-
+               
         public Pawn Pawn
         {
             get
@@ -138,11 +150,36 @@ namespace WarGame.Models
             }
         }
 
+        public Dictionary<Type, AbstractBuildCapability> BuildCapabilities
+        {
+            get
+            {
+                return buildCapabilities;
+            }
 
+            set
+            {
+                buildCapabilities = value;
+            }
+        }
 
+        public Dictionary<Type, AbstractTrainCapability> TrainCapabilities
+        {
+            get
+            {
+                return trainCapabilities;
+            }
+
+            set
+            {
+                trainCapabilities = value;
+            }
+        }
+        
         #endregion
 
         #region Constructors
+
         public Player(Map map)
         {
             Map = map;
@@ -151,13 +188,153 @@ namespace WarGame.Models
             Units = new List<AbstractUnit>();
             Buildables = new Dictionary<int, AbstractBuildable>();
             Buildings = new List<AbstractBuilding>();
-            TrainCapabilities = new List<AbstractTrainCapability>();
-            BuildCapabilities = new List<AbstractBuildCapability>();
+            TrainCapabilities = new Dictionary<Type, AbstractTrainCapability>();
+            BuildCapabilities = new Dictionary<Type, AbstractBuildCapability>();
             AddBuilding(new Farm(0, 0, 100));
             Pawn = new Pawn();
             Pawn.GatherEvent += Pawn_GatherEvent;
 
 
+        }
+
+
+
+
+        #endregion
+
+        #region Public Methods
+
+        public void NewTurn()
+        {
+
+        }
+
+
+
+        //public void TrainUnit(DecoratorUnit upgrade)
+        //{
+        //    var indexOfUnitToBeUpgraded = Units.IndexOf(upgrade.Unit);
+        //    var upgradedUnit = upgrade.Upgrade();
+        //    Units[indexOfUnitToBeUpgraded] = upgradedUnit;
+        //    upgradedUnit.Id = upgrade.Unit.Id;
+        //    Buildables[upgrade.Unit.Id] = upgradedUnit;
+        //}
+
+        #endregion
+
+        #region Private Methods
+
+        private void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
+        {
+            var newbuilding = buildCapability.Build(building);
+            if (building == null)
+            {
+                AddBuilding(newbuilding);
+
+            }
+            else
+            {
+                RemoveBuilding(building);
+                Buildings.Add(newbuilding);
+                Buildables[building.Id] = newbuilding;
+            }
+
+
+        }
+
+        private void TrainUnit(AbstractTrainCapability trainCapability, AbstractUnit unit = null)
+        {
+            var newunit = trainCapability.Train(unit);
+            if (unit == null)
+            {
+                AddUnit(newunit);
+            }
+            else
+            {
+                RemoveUnit(unit);
+                Units.Add(newunit);
+                Buildables[unit.Id] = newunit;
+            }
+        }
+
+        private void Attack(int buildableId, int attackStrength)
+        {
+            Buildables[buildableId].UnderAttackEvent += (sender, args) => { Console.WriteLine("[{0} - {1}] Buildable is under attack. Current life {2}", sender.Id, sender.GetType().Name, sender.Life); };
+            Buildables[buildableId].Attack(attackStrength);
+        }
+
+        private void Move(int x, int y)
+        {
+            pawn.MoveToLocation(new Point(x, y));
+        }
+
+        private void Ghater()
+        {
+            Pawn.GatherResources();
+        }
+
+        private void AddUnit(AbstractUnit unit)
+        {
+            Units.Add(unit);
+            Buildables.Add(unit.Id, unit);
+        }
+
+        private void AddBuilding(AbstractBuilding building)
+        {
+            Buildings.Add(building);
+            Buildables.Add(building.Id, building);
+
+            foreach (var capability in building.BuildCapabilities)
+            {
+                if (!BuildCapabilities.ContainsKey(capability.Key))
+                    BuildCapabilities.Add(capability.Key, capability.Value);
+            }
+
+            foreach (var capability in building.TrainCapabilities)
+            {
+                if (!TrainCapabilities.ContainsKey(capability.Key))
+                    TrainCapabilities.Add(capability.Key, capability.Value);
+            }
+
+            building.UnderConstructionEvent += Building_UnderConstructionEvent;
+            building.StartBuilding();
+        }
+
+        private void RemoveBuilding(AbstractBuilding building)
+        {
+            //TODO:unsubscribe from events
+            Buildings.Remove(building);
+
+        }
+
+        private void RemoveUnit(AbstractUnit unit)
+        {
+            //TODO: unsubscribe from events
+            Units.Remove(unit);
+        }
+        
+        #endregion
+
+        #region Test Methods
+
+        public void ListUnits()
+        {
+            Console.WriteLine("Player Units:");
+            foreach (var unit in Units)
+            {
+                Console.WriteLine(unit);
+            }
+            Console.WriteLine("");
+        }
+
+        public void ListBuildings()
+        {
+            Console.WriteLine("Player Buildings:");
+            foreach (var building in Buildings)
+            {
+                Console.WriteLine(building);
+            }
+            Console.WriteLine("");
         }
 
         public void ReadCommands()
@@ -170,7 +347,7 @@ namespace WarGame.Models
                     cmdText = sr.ReadLine();
                     var commandName = cmdText.Split(' ')[0];
                     string args = "";
-                    if(cmdText.Contains(" "))
+                    if (cmdText.Contains(" "))
                         args = cmdText.Split(' ')[1];
                     PlayerCommand playerCommand;
                     switch (commandName)
@@ -204,11 +381,11 @@ namespace WarGame.Models
                                     switch (args)
                                     {
                                         case "Barrack":
-                                            Build(new BuildBarrackCapability());
+                                            Build(BuildCapabilities[typeof(BuildBarrackCapability)]);
                                             break;
-                                        //case "BowWorkshop":
-                                        //    Build(new BuildBowWorkshopCapability());
-                                       //     break;
+                                        case "BowWorkshop":
+                                            Build(BuildCapabilities[typeof(BuildBowWorkshopCapability)]);
+                                            break;
                                         default:
                                             break;
                                     }
@@ -229,11 +406,39 @@ namespace WarGame.Models
                                 commands.TryAdd(playerCommand);
                             }
                             break;
+                        case "List":
+                            {
+                                switch(args)
+                                {
+                                    case "Units":
+                                        {
+                                            playerCommand = new PlayerCommand(() =>
+                                            {
+                                                ListUnits();
+                                            });
+                                            commands.TryAdd(playerCommand);
+                                        }
+                                        break;
+                                    case "Buildings":
+                                        {
+                                            playerCommand = new PlayerCommand(() =>
+                                            {
+                                                ListBuildings();
+                                            });
+                                            commands.TryAdd(playerCommand);
+                                        }
+                                        break;
+                                    default:
+                                        //TODO:...
+                                        break;
+                                }
+                            }
+                            break;
                         case "Train":
                             var playerTrainCommand = new PlayerCommand(() =>
                             {
                                 string unitType = "";
-                                int unitID=0;
+                                int unitID = 0;
                                 if (args.Contains(","))
                                 {
                                     unitType = args.Split(',')[0];
@@ -246,15 +451,15 @@ namespace WarGame.Models
                                 switch (unitType)
                                 {
                                     case "Farmer":
-                                        var simpleFarmer = new Farmer(0, 0, 100);
-                                        AddUnit(simpleFarmer);
+                                        TrainUnit(TrainCapabilities[typeof(TrainFarmerCapability)]);
                                         break;
                                     case "Swordman":
                                         //var swordman = new Farmer(0, 0, 100);
                                         var unit = Buildables[unitID] as Farmer;
                                         if (unit != null)
                                         {
-                                            TrainUnit(new SwordManUpgrade1(unit));
+                                            //TrainUnit(new SwordManUpgrade1(unit));
+                                            TrainUnit(TrainCapabilities[typeof(TrainSwordmanCapability)], unit);
                                         }
                                         else
                                         {
@@ -266,7 +471,8 @@ namespace WarGame.Models
                                         var unit1 = Buildables[unitID] as Farmer;
                                         if (unit1 != null)
                                         {
-                                            TrainUnit(new BowmanUpgrade1(unit1));
+                                            //TrainUnit(new BowmanUpgrade1(unit1));
+                                            TrainUnit(TrainCapabilities[typeof(TrainBowmanCapability)], unit1);
                                         }
                                         else
                                         {
@@ -276,7 +482,7 @@ namespace WarGame.Models
                                     default:
                                         break;
                                 }
-                                
+
                             });
                             commands.TryAdd(playerTrainCommand);
                             break;
@@ -286,6 +492,8 @@ namespace WarGame.Models
                 }
             }
         }
+
+
 
         public void ExecuteCommands()
         {
@@ -297,153 +505,6 @@ namespace WarGame.Models
                 {
                     command.Execute();
                 }
-            }
-        }
-
-        private void Pawn_GatherEvent()
-        {
-            foreach (var unit in units)
-            {
-                if (unit.GetType() == typeof(Farmer))
-                {
-                    if (Resources.ContainsKey(map.GetResourcePosition(pawn.Location)))
-                    {
-                        Resources[map.GetResourcePosition(pawn.Location)]++;
-                    }
-                    else
-                    {
-                        Resources.Add(map.GetResourcePosition(pawn.Location), 1);
-                    }
-                }
-            }
-
-            Console.WriteLine("Current Resources:");
-            foreach (var resource in Resources)
-            {
-                Console.WriteLine("{0}: {1}", resource.Key.ToString(), resource.Value);
-            }
-        }
-
-
-        #endregion
-
-        #region Public Methods
-
-        public void NewTurn()
-        {
-
-        }
-
-        public void AddUnit(AbstractUnit unit)
-        {
-            Units.Add(unit);
-            Buildables.Add(unit.Id, unit);
-
-        }
-
-        private void AddBuilding(AbstractBuilding building)
-        {
-            Buildings.Add(building);
-            Buildables.Add(building.Id, building);
-
-            bool capabilityExists = false;
-            foreach (var capability in building.BuildCapabilities)
-            {
-                capabilityExists = false;
-                foreach (var bcapability in BuildCapabilities)
-                    if (bcapability.GetType() == capability.GetType())
-                    {
-                        capabilityExists = true;
-                        break;
-                    }
-                if (!capabilityExists)
-                    BuildCapabilities.Add(capability);
-            }
-
-            foreach (var capability in building.TrainCapabilities)
-            {
-                capabilityExists = false;
-                foreach (var bcapability in BuildCapabilities)
-                    if (bcapability.GetType() == capability.GetType())
-                    {
-                        capabilityExists = true;
-                        break;
-                    }
-                if (!capabilityExists)
-                    TrainCapabilities.Add(capability);
-            }
-
-
-            building.UnderConstructionEvent += Building_UnderConstructionEvent;
-            building.StartBuilding();
-        }
-
-        private void Building_UnderConstructionEvent(AbstractBuildable sender, ConstructionArgs args)
-        {
-            Console.WriteLine("[{0}] Built {1} {2}", sender.GetHashCode(), args.Percentage, sender.GetType().Name);
-
-            if (args.Percentage == 100)
-            {
-                sender.UnderConstructionEvent -= Building_UnderConstructionEvent;
-            }
-        }
-
-        public void Build(AbstractBuildCapability buildCapability, AbstractBuilding building = null)
-        {
-            var newbuilding = buildCapability.Build(building);
-            if (building == null)
-            {
-                AddBuilding(newbuilding);
-            }
-            else
-            {
-                RemoveBuilding(building);
-                Buildings.Add(newbuilding);
-            }
-        }
-
-        private void RemoveBuilding(AbstractBuilding building)
-        {
-            //TO DO:unsubscribe from events
-            Buildings.Remove(building);
-        }
-
-        public void Attack(int buildableId, int attackStrength)
-        {
-            Buildables[buildableId].UnderAttackEvent += (sender, args) => { Console.WriteLine("[{0} - {1}] Buildable is under attack. Current life {2}", sender.Id, sender.GetType().Name, sender.Life); };
-            Buildables[buildableId].Attack(attackStrength);
-        }
-
-        public void Move(int x, int y)
-        {
-            pawn.MoveToLocation(new Point(x, y));
-        }
-
-        public void Ghater()
-        {
-            Pawn.GatherResources();
-        }
-
-
-        public void TrainUnit(DecoratorUnit upgrade)
-        {
-            var indexOfUnitToBeUpgraded = Units.IndexOf(upgrade.Unit);
-            var upgradedUnit = upgrade.Upgrade();
-            Units[indexOfUnitToBeUpgraded] = upgradedUnit;
-            upgradedUnit.Id = upgrade.Unit.Id;
-            Buildables[upgrade.Unit.Id] = upgradedUnit;
-        }
-
-        public void TrainUnitCommand(AbstractUnit unit)
-        {
-
-        }
-
-        public void ListUnits()
-        {
-            foreach (var unit in Units)
-            {
-                Console.WriteLine(unit);
             }
         }
 

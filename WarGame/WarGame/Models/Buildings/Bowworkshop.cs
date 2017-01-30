@@ -3,17 +3,19 @@ using WarGame.Models.Capabilities;
 
 namespace WarGame.Models.Buildings
 {
-    class BowWorkshop : AbstractBuilding
+    public class BowWorkshop : AbstractBuilding
     {
+        #region Constructors
+
         public BowWorkshop(int y, int x, int life) : base(y, x, life)
         {
-            TrainCapabilities.Add(new TrainBowmanCapability());
+            TrainCapabilities.Add(typeof(TrainBowmanCapability), new TrainBowmanCapability());
+            BuildCapabilities.Add(typeof(UpgradeBowWorkshopCapability), new UpgradeBowWorkshopCapability());
             progress = 10;
         }
 
-        public override AbstractBuilding Upgrade()
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
+
+
     }
 }

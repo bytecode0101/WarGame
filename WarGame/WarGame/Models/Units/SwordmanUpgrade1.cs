@@ -21,10 +21,7 @@ namespace WarGame.Models.Units
             Console.WriteLine("Attack power: " + extraLife);
         }
 
-        public override void GatherResource(Tile argTile)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public override void Move(Point destination)
         {
