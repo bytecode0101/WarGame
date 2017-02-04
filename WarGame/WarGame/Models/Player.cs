@@ -9,6 +9,10 @@ using System.Collections.Concurrent;
 using WarGame.Models.Commands;
 using System.IO;
 using System.Threading;
+using WarGame.Sockets;
+using System.Net.Sockets;
+using System.Net;
+using System.Text;
 
 namespace WarGame.Models
 {
@@ -71,7 +75,7 @@ namespace WarGame.Models
         private Dictionary<Type, AbstractBuildCapability> buildCapabilities;
         private Dictionary<Type, AbstractTrainCapability> trainCapabilities;
         private List<AbstractUnit> units;
-
+        private Server server = new Server();
         //BlockingCollection<ICommand> commands = new BlockingCollection<ICommand>();
         BlockingQueue<ICommand> commands = new BlockingQueue<ICommand>();
 
@@ -360,151 +364,223 @@ namespace WarGame.Models
                 {
                     Thread.Sleep(10);
                     cmdText = sr.ReadLine();
-                    var commandName = cmdText.Split(' ')[0];
-                    string args = "";
-                    if (cmdText.Contains(" "))
-                        args = cmdText.Split(' ')[1];
-                    PlayerCommand playerCommand;
-                    switch (commandName)
+                    AddCommandToQueue(cmdText);
+                }
+            }
+        }
+
+        public void ReadCommandsFromTCP()
+        {
+            // Data buffer for incoming data.  
+            byte[] bytes = new Byte[1024];
+
+            // Establish the local endpoint for the socket.  
+            // Dns.GetHostName returns the name of the   
+            // host running the application.  
+            IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
+            IPAddress ipAddress = ipHostInfo.AddressList[0];
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
+
+            // Create a TCP/IP socket.  
+            Socket listener = new Socket(AddressFamily.InterNetwork,
+                SocketType.Stream, ProtocolType.Tcp);
+
+            // Bind the socket to the local endpoint and   
+            // listen for incoming connections.  
+            try
+            {
+                listener.Bind(localEndPoint);
+                listener.Listen(10);
+
+                // Start listening for connections.  
+                while (true)
+                {
+                    Console.WriteLine("Waiting for a connection...");
+                    // Program is suspended while waiting for an incoming connection.  
+                    Socket handler = listener.Accept();
+                    string data = null;
+
+                    // An incoming connection needs to be processed.  
+                    while (true)
                     {
-                        case "Move":
+                        bytes = new byte[1024];
+                        int bytesRec = handler.Receive(bytes);
+                        data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                        if (data.Equals("StopListen<EOF>"))
+                        {
+                            Console.WriteLine("Close server listener socket.");
+                            listener.Close();
+                            return;
+                        }
+                        if (data.IndexOf("<EOF>") > -1)
+                        {
+                            handler.Send(Encoding.ASCII.GetBytes(data));
+                            Console.WriteLine("Text received : {0}", data);
+
+                            AddCommandToQueue(data.Substring(0, data.IndexOf("<")));
+                            //break;
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            //finally
+            //{
+            //    Console.WriteLine("\nPress ENTER to continue...");
+            //    Console.Read();
+            //}
+        }
+
+        private void AddCommandToQueue(string cmdText)
+        {
+            var commandName = cmdText.Split(' ')[0];
+            string args = "";
+            if (cmdText.Contains(" "))
+                args = cmdText.Split(' ')[1];
+            PlayerCommand playerCommand;
+            switch (commandName)
+            {
+                case "Move":
+                    {
+                        int x;
+                        int.TryParse(args.Split(',')[0], out x);
+                        int y;
+                        int.TryParse(args.Split(',')[1], out y);
+                        playerCommand = new PlayerCommand(() =>
+                        {
+                            Move(x, y);
+                        });
+                        commands.TryAdd(playerCommand);
+                    }
+                    break;
+                case "Gather":
+                    {
+                        playerCommand = new PlayerCommand(() =>
+                        {
+                            Ghater();
+                        });
+                        commands.TryAdd(playerCommand);
+                    }
+                    break;
+                case "Build":
+                    {
+                        playerCommand = new PlayerCommand(() =>
+                        {
+                            switch (args)
                             {
-                                int x;
-                                int.TryParse(args.Split(',')[0], out x);
-                                int y;
-                                int.TryParse(args.Split(',')[1], out y);
-                                playerCommand = new PlayerCommand(() =>
-                                {
-                                    Move(x, y);
-                                });
-                                commands.TryAdd(playerCommand);
+                                case "Barrack":
+                                    Build(BuildCapabilities[typeof(BuildBarrackCapability)]);
+                                    break;
+                                case "BowWorkshop":
+                                    Build(BuildCapabilities[typeof(BuildBowWorkshopCapability)]);
+                                    break;
+                                default:
+                                    break;
                             }
-                            break;
-                        case "Gather":
-                            {
-                                playerCommand = new PlayerCommand(() =>
+                        });
+                        commands.TryAdd(playerCommand);
+                    }
+                    break;
+                case "Attack":
+                    {
+                        playerCommand = new PlayerCommand(() =>
+                        {
+                            int unitID;
+                            int attackStrength;
+                            int.TryParse(args.Split(',')[0], out unitID);
+                            int.TryParse(args.Split(',')[1], out attackStrength);
+                            Attack(unitID, attackStrength);
+                        });
+                        commands.TryAdd(playerCommand);
+                    }
+                    break;
+                case "List":
+                    {
+                        switch (args)
+                        {
+                            case "Units":
                                 {
-                                    Ghater();
-                                });
-                                commands.TryAdd(playerCommand);
-                            }
-                            break;
-                        case "Build":
-                            {
-                                playerCommand = new PlayerCommand(() =>
-                                {
-                                    switch (args)
+                                    playerCommand = new PlayerCommand(() =>
                                     {
-                                        case "Barrack":
-                                            Build(BuildCapabilities[typeof(BuildBarrackCapability)]);
-                                            break;
-                                        case "BowWorkshop":
-                                            Build(BuildCapabilities[typeof(BuildBowWorkshopCapability)]);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                });
-                                commands.TryAdd(playerCommand);
-                            }
-                            break;
-                        case "Attack":
-                            {
-                                playerCommand = new PlayerCommand(() =>
-                                {
-                                    int unitID;
-                                    int attackStrength;
-                                    int.TryParse(args.Split(',')[0], out unitID);
-                                    int.TryParse(args.Split(',')[1], out attackStrength);
-                                    Attack(unitID, attackStrength);
-                                });
-                                commands.TryAdd(playerCommand);
-                            }
-                            break;
-                        case "List":
-                            {
-                                switch(args)
-                                {
-                                    case "Units":
-                                        {
-                                            playerCommand = new PlayerCommand(() =>
-                                            {
-                                                ListUnits();
-                                            });
-                                            commands.TryAdd(playerCommand);
-                                        }
-                                        break;
-                                    case "Buildings":
-                                        {
-                                            playerCommand = new PlayerCommand(() =>
-                                            {
-                                                ListBuildings();
-                                            });
-                                            commands.TryAdd(playerCommand);
-                                        }
-                                        break;
-                                    default:
-                                        //TODO:...
-                                        break;
+                                        ListUnits();
+                                    });
+                                    commands.TryAdd(playerCommand);
                                 }
-                            }
-                            break;
-                        case "Train":
-                            var playerTrainCommand = new PlayerCommand(() =>
-                            {
-                                string unitType = "";
-                                int unitID = 0;
-                                if (args.Contains(","))
+                                break;
+                            case "Buildings":
                                 {
-                                    unitType = args.Split(',')[0];
-                                    int.TryParse(args.Split(',')[1], out unitID);
+                                    playerCommand = new PlayerCommand(() =>
+                                    {
+                                        ListBuildings();
+                                    });
+                                    commands.TryAdd(playerCommand);
+                                }
+                                break;
+                            default:
+                                //TODO:...
+                                break;
+                        }
+                    }
+                    break;
+                case "Train":
+                    var playerTrainCommand = new PlayerCommand(() =>
+                    {
+                        string unitType = "";
+                        int unitID = 0;
+                        if (args.Contains(","))
+                        {
+                            unitType = args.Split(',')[0];
+                            int.TryParse(args.Split(',')[1], out unitID);
+                        }
+                        else
+                        {
+                            unitType = args;
+                        }
+                        switch (unitType)
+                        {
+                            case "Farmer":
+                                TrainUnit(TrainCapabilities[typeof(TrainFarmerCapability)]);
+                                break;
+                            case "Swordman":
+                                //var swordman = new Farmer(0, 0, 100);
+                                var unit = Buildables[unitID] as Farmer;
+                                if (unit != null)
+                                {
+                                    //TrainUnit(new SwordManUpgrade1(unit));
+                                    TrainUnit(TrainCapabilities[typeof(TrainSwordmanCapability)], unit);
                                 }
                                 else
                                 {
-                                    unitType = args;
+                                    //TODO: throw exeception
                                 }
-                                switch (unitType)
+                                break;
+                            case "Bowman":
+                                //var swordman = new Farmer(0, 0, 100);
+                                var unit1 = Buildables[unitID] as Farmer;
+                                if (unit1 != null)
                                 {
-                                    case "Farmer":
-                                        TrainUnit(TrainCapabilities[typeof(TrainFarmerCapability)]);
-                                        break;
-                                    case "Swordman":
-                                        //var swordman = new Farmer(0, 0, 100);
-                                        var unit = Buildables[unitID] as Farmer;
-                                        if (unit != null)
-                                        {
-                                            //TrainUnit(new SwordManUpgrade1(unit));
-                                            TrainUnit(TrainCapabilities[typeof(TrainSwordmanCapability)], unit);
-                                        }
-                                        else
-                                        {
-                                            //TODO: throw exeception
-                                        }
-                                        break;
-                                    case "Bowman":
-                                        //var swordman = new Farmer(0, 0, 100);
-                                        var unit1 = Buildables[unitID] as Farmer;
-                                        if (unit1 != null)
-                                        {
-                                            //TrainUnit(new BowmanUpgrade1(unit1));
-                                            TrainUnit(TrainCapabilities[typeof(TrainBowmanCapability)], unit1);
-                                        }
-                                        else
-                                        {
-                                            //TODO: throw exeception
-                                        }
-                                        break;
-                                    default:
-                                        break;
+                                    //TrainUnit(new BowmanUpgrade1(unit1));
+                                    TrainUnit(TrainCapabilities[typeof(TrainBowmanCapability)], unit1);
                                 }
+                                else
+                                {
+                                    //TODO: throw exeception
+                                }
+                                break;
+                            default:
+                                break;
+                        }
 
-                            });
-                            commands.TryAdd(playerTrainCommand);
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                    });
+                    commands.TryAdd(playerTrainCommand);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -527,7 +603,7 @@ namespace WarGame.Models
                 else
                 {
                     //TODO: use Monitor to avoid this!
-                    Console.WriteLine("Bussy waiting!");
+                    //Console.WriteLine("Bussy waiting!");
                 }
             }
         }
