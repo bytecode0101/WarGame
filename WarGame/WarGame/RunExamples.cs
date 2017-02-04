@@ -57,7 +57,8 @@ namespace WarGame
             //SimpleGameExample();
             Init();
             player1.ReadCommands();
-            player1.ExecuteCommands();
+            // player1.ExecuteCommands();
+            player1.StartCommndsExecution();
             //BuildBarrack();
 
             //BuildUnits();

@@ -63,6 +63,7 @@
     <Compile Include="Models\Capabilities\TrainSwordmanCapability.cs" />
     <Compile Include="Models\Capabilities\UpgradeBowWorkshopCapability.cs" />
     <Compile Include="Models\Capabilities\UpgradeBarrackCapability.cs" />
+    <Compile Include="Models\Commands\BlockingQueue.cs" />
     <Compile Include="Models\Commands\ICommand.cs" />
     <Compile Include="Models\Commands\PlayerCommand.cs" />
     <Compile Include="Models\Events\UnderAttackArgs.cs" />

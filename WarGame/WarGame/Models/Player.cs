@@ -8,11 +8,19 @@ using WarGame.Models.Events;
 using System.Collections.Concurrent;
 using WarGame.Models.Commands;
 using System.IO;
+using System.Threading;
 
 namespace WarGame.Models
 {
     public class Player
     {
+
+        #region Threads
+
+        private Thread ExecuteCommandsThread;
+
+        #endregion
+
         #region Events
 
         private void Pawn_GatherEvent()
@@ -64,7 +72,9 @@ namespace WarGame.Models
         private Dictionary<Type, AbstractTrainCapability> trainCapabilities;
         private List<AbstractUnit> units;
 
-        BlockingCollection<ICommand> commands = new BlockingCollection<ICommand>();
+        //BlockingCollection<ICommand> commands = new BlockingCollection<ICommand>();
+        BlockingQueue<ICommand> commands = new BlockingQueue<ICommand>();
+
 
         #endregion
 
@@ -190,6 +200,9 @@ namespace WarGame.Models
             Buildings = new List<AbstractBuilding>();
             TrainCapabilities = new Dictionary<Type, AbstractTrainCapability>();
             BuildCapabilities = new Dictionary<Type, AbstractBuildCapability>();
+
+            ExecuteCommandsThread = new Thread(ExecuteCommands);
+
             AddBuilding(new Farm(0, 0, 100));
             Pawn = new Pawn();
             Pawn.GatherEvent += Pawn_GatherEvent;
@@ -339,6 +352,7 @@ namespace WarGame.Models
 
         public void ReadCommands()
         {
+            
             using (var sr = new StreamReader("SavedGames\\script.txt"))
             {
                 string cmdText;
@@ -493,9 +507,12 @@ namespace WarGame.Models
             }
         }
 
+        public void StartCommndsExecution()
+        {
+            ExecuteCommandsThread.Start();
+        }
 
-
-        public void ExecuteCommands()
+        private void ExecuteCommands()
         {
             while (true)
             {
@@ -503,6 +520,7 @@ namespace WarGame.Models
                 commands.TryTake(out command);
                 if (command != null)
                 {
+                    Console.WriteLine("Executing command from thread [{0}]", Thread.CurrentThread.ManagedThreadId);
                     command.Execute();
                 }
             }
