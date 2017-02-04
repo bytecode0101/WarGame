@@ -358,6 +358,7 @@ namespace WarGame.Models
                 string cmdText;
                 while (!sr.EndOfStream)
                 {
+                    Thread.Sleep(10);
                     cmdText = sr.ReadLine();
                     var commandName = cmdText.Split(' ')[0];
                     string args = "";
@@ -523,9 +524,13 @@ namespace WarGame.Models
                     Console.WriteLine("Executing command from thread [{0}]", Thread.CurrentThread.ManagedThreadId);
                     command.Execute();
                 }
+                else
+                {
+                    //TODO: use Monitor to avoid this!
+                    Console.WriteLine("Bussy waiting!");
+                }
             }
         }
-
         #endregion
     }
 }
