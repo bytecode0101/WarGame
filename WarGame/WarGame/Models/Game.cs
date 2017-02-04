@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using NLog;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -12,6 +13,7 @@ namespace WarGame.Models
 {
     public class Game
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         #region Events
 
@@ -91,6 +93,7 @@ namespace WarGame.Models
         #region Constructors
         private Game()
         {
+            logger.Info("Createing a new game");
             Players = new List<Player>();
             timer = new Timer();
             timer.Interval = 200;
@@ -114,6 +117,7 @@ namespace WarGame.Models
 
         public void Load(string path)
         {
+            logger.Fatal("loading {0}", path);
             string text;
             using (var sr = new StreamReader(path))
             {

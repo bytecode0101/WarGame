@@ -13,11 +13,13 @@ using WarGame.Sockets;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
+using NLog;
 
 namespace WarGame.Models
 {
     public class Player
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         #region Threads
 
@@ -395,6 +397,7 @@ namespace WarGame.Models
                 // Start listening for connections.  
                 while (true)
                 {
+                    logger.Info("Waiting for a connection...");
                     Console.WriteLine("Waiting for a connection...");
                     // Program is suspended while waiting for an incoming connection.  
                     Socket handler = listener.Accept();
@@ -427,7 +430,7 @@ namespace WarGame.Models
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                logger.Error("Error at ReadCommandsFromTCP {0}", e.Message);
             }
             //finally
             //{
