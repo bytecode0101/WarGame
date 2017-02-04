@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using WarGame.Models;
@@ -11,6 +12,7 @@ namespace WarGame
 {
     public class RunExamples
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         static Game game;
 
         static Player player1;

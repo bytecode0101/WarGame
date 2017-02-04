@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace WarGame.Models
 {
     public class Pawn
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private List<AbstractUnit> units;
         private Point location;
 
@@ -29,6 +31,7 @@ namespace WarGame.Models
 
         public void MoveToLocation(Point argLocation)
         {
+            logger.Info("moving to location {0}", argLocation);
             Location = argLocation;
         }
 
