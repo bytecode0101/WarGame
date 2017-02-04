@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarGameTests", "WarGameTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunGame", "RunGame\RunGame.csproj", "{978D1D29-B048-462A-8550-D4A4A4F02321}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientCommand", "..\..\..\..\Documents\Visual Studio 2015\Projects\ClientCommand\ClientCommand\ClientCommand.csproj", "{A795B4D9-7195-4B97-A109-A00FBA20A0AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientCommand", "ClientCommand\ClientCommand.csproj", "{A795B4D9-7195-4B97-A109-A00FBA20A0AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

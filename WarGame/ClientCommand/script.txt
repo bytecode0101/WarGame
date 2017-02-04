@@ -1,0 +1,22 @@
+﻿Train Farmer
+Move 2,2
+Gather
+Move 4,4
+Gather
+Move 4,5
+Gather
+Train Farmer
+Train Farmer
+Train Farmer
+Train Farmer
+Gather
+Gather
+Build Barrack
+Train Swordman,1
+Build BowWorkshop
+Train Bowman,2
+Move 5,5
+Attack 0, 20
+List Units
+List Buildings
+StopListen
