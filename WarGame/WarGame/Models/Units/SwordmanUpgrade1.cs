@@ -18,7 +18,7 @@ namespace WarGame.Models.Units
 
         public override void Attack()
         {
-            Console.WriteLine("Attack power: " + extraLife);
+            //Console.WriteLine("Attack power: " + extraLife);
         }
 
         

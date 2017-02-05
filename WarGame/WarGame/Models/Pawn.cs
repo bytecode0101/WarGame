@@ -11,7 +11,6 @@ namespace WarGame.Models
     public class Pawn
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        private List<AbstractUnit> units;
         private Point location;
 
         public Point Location
@@ -27,6 +26,9 @@ namespace WarGame.Models
             }
         }
 
+        /// <summary>
+        /// Event used to gather a resource
+        /// </summary>
         public event GatherEvent GatherEvent;
 
         public void MoveToLocation(Point argLocation)
@@ -35,19 +37,12 @@ namespace WarGame.Models
             Location = argLocation;
         }
 
-        
-        private void OnResourceGathered()
-        {
-            GatherEvent?.Invoke();
-
-            System.Console.WriteLine("Resources were gathered.");
-        }
-
+        /// <summary>
+        /// GatherEvent invoker
+        /// </summary>
         public void GatherResources()
         {
             GatherEvent?.Invoke();
-
-            System.Console.WriteLine("Resources were gathered.");
         }
     }
 }

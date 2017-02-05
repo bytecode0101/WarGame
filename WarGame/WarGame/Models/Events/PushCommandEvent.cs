@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WarGame.Models
+namespace WarGame.Models.Events
 {
-    interface ITurnBasedComponent
-    {
-    }
+     public delegate void PushCommand(object sender, PushCommandArgs args);
+
 }

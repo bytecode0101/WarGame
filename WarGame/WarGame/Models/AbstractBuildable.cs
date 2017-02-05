@@ -32,11 +32,18 @@ namespace WarGame.Models
             }
         }
 
+        /// <summary>
+        /// Subscribe to game new turn event
+        /// </summary>
         public void StartBuilding()
         {
             Game.Instance.NewTurnEvent += UnderContructionProgress;
         }
 
+        /// <summary>
+        /// Under attack. Invoke under attack event.
+        /// </summary>
+        /// <param name="strength"></param>
         public void Attack(int strength)
         {
             if (Life > 0)
@@ -59,7 +66,6 @@ namespace WarGame.Models
                 Game.Instance.NewTurnEvent -= UnderContructionProgress;
             }
         }
-
 
         private void UnderAttackProgress(Game sender, NewTurnArgs args)
         {

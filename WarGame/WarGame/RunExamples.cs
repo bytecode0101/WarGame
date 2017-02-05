@@ -21,8 +21,9 @@ namespace WarGame
         {
             game = Game.Instance;
             game.Load("SavedGames\\Map.txt");
-
-            player1 = new Player(game.Map);
+            //ICommandReader commandReader = new FileCommandReader();
+            ICommandReader commandReader = new TcpCommandReader();
+            player1 = new Player(game.Map, commandReader);
         }
 
         static void SimpleGameExample()
@@ -58,10 +59,10 @@ namespace WarGame
         {
             //SimpleGameExample();
             Init();
-            //player1.ReadCommands();
-            player1.ReadCommandsFromTCP();
+            player1.ReadCommands();
+            //player1.ReadCommandsFromTCP();
             // player1.ExecuteCommands();
-            player1.StartCommndsExecution();
+            player1.ExecuteCommands();
             //BuildBarrack();
 
             //BuildUnits();

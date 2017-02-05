@@ -5,11 +5,9 @@ using WarGame.Models.Units;
 using WarGame.Models.Capabilities;
 using System;
 using WarGame.Models.Events;
-using System.Collections.Concurrent;
 using WarGame.Models.Commands;
 using System.IO;
 using System.Threading;
-using WarGame.Sockets;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
@@ -45,18 +43,16 @@ namespace WarGame.Models
                     }
                 }
             }
-
-            Console.WriteLine("Current Resources:");
+            logger.Trace("Current resources: ");
             foreach (var resource in Resources)
             {
-                Console.WriteLine("{0}: {1}", resource.Key.ToString(), resource.Value);
+                logger.Trace("{0}: {1}", resource.Key.ToString(), resource.Value);
             }
         }
 
         private void Building_UnderConstructionEvent(AbstractBuildable sender, ConstructionArgs args)
         {
-            Console.WriteLine("[{0}] Built {1}% of {2}", sender.GetHashCode(), args.Percentage, sender.GetType().Name);
-
+            logger.Trace("[{0}] Built {1}% of {2}", sender.GetHashCode(), args.Percentage, sender.GetType().Name);
             if (args.Percentage == 100)
             {
                 sender.UnderConstructionEvent -= Building_UnderConstructionEvent;
@@ -77,10 +73,10 @@ namespace WarGame.Models
         private Dictionary<Type, AbstractBuildCapability> buildCapabilities;
         private Dictionary<Type, AbstractTrainCapability> trainCapabilities;
         private List<AbstractUnit> units;
-        private Server server = new Server();
         //BlockingCollection<ICommand> commands = new BlockingCollection<ICommand>();
         BlockingQueue<ICommand> commands = new BlockingQueue<ICommand>();
 
+        private ICommandReader commandReader;
 
         #endregion
 
@@ -191,12 +187,25 @@ namespace WarGame.Models
                 trainCapabilities = value;
             }
         }
-        
+
+        internal ICommandReader CommandReader
+        {
+            get
+            {
+                return commandReader;
+            }
+
+            set
+            {
+                commandReader = value;
+            }
+        }
+
         #endregion
 
         #region Constructors
 
-        public Player(Map map)
+        public Player(Map map, ICommandReader commandReader)
         {
             Map = map;
             Id = numberOfPlayers++;
@@ -207,33 +216,34 @@ namespace WarGame.Models
             TrainCapabilities = new Dictionary<Type, AbstractTrainCapability>();
             BuildCapabilities = new Dictionary<Type, AbstractBuildCapability>();
 
-            ExecuteCommandsThread = new Thread(ExecuteCommands);
+            ExecuteCommandsThread = new Thread(Execute);
 
             AddBuilding(new Farm(0, 0, 100));
             Pawn = new Pawn();
             Pawn.GatherEvent += Pawn_GatherEvent;
 
-
+            CommandReader = commandReader;
         }
         #endregion
 
         #region Public Methods
 
-        public void NewTurn()
+        /// <summary>
+        ///     Start thread to execute commands from queue
+        /// </summary>
+        public void ExecuteCommands()
         {
-
+            ExecuteCommandsThread.Start();
         }
 
-
-
-        //public void TrainUnit(DecoratorUnit upgrade)
-        //{
-        //    var indexOfUnitToBeUpgraded = Units.IndexOf(upgrade.Unit);
-        //    var upgradedUnit = upgrade.Upgrade();
-        //    Units[indexOfUnitToBeUpgraded] = upgradedUnit;
-        //    upgradedUnit.Id = upgrade.Unit.Id;
-        //    Buildables[upgrade.Unit.Id] = upgradedUnit;
-        //}
+        /// <summary>
+        ///     Read commands using the command reader
+        /// </summary>
+        public void ReadCommands()
+        {
+            CommandReader.PushCommandEvent += PushCommandToQueue;
+            CommandReader.ReadCommands();
+        }
 
         #endregion
 
@@ -245,7 +255,6 @@ namespace WarGame.Models
             if (building == null)
             {
                 AddBuilding(newbuilding);
-
             }
             else
             {
@@ -326,113 +335,6 @@ namespace WarGame.Models
         {
             //TODO: unsubscribe from events
             Units.Remove(unit);
-        }
-        
-        #endregion
-
-        #region Test Methods
-
-        public void ListUnits()
-        {
-            Console.WriteLine("Player Units:");
-            foreach (var unit in Units)
-            {
-                Console.WriteLine(unit);
-            }
-            Console.WriteLine("");
-        }
-
-        public void ListBuildings()
-        {
-            Console.WriteLine("Player Buildings:");
-            foreach (var building in Buildings)
-            {
-                Console.WriteLine(building);
-            }
-            Console.WriteLine("");
-        }
-
-        public void ReadCommands()
-        {
-            
-            using (var sr = new StreamReader("SavedGames\\script.txt"))
-            {
-                string cmdText;
-                while (!sr.EndOfStream)
-                {
-                    Thread.Sleep(10);
-                    cmdText = sr.ReadLine();
-                    AddCommandToQueue(cmdText);
-                }
-            }
-        }
-
-        public void ReadCommandsFromTCP()
-        {
-            // Data buffer for incoming data.  
-            byte[] bytes = new Byte[1024];
-
-            // Establish the local endpoint for the socket.  
-            // Dns.GetHostName returns the name of the   
-            // host running the application.  
-            IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
-            IPAddress ipAddress = ipHostInfo.AddressList[0];
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
-
-            // Create a TCP/IP socket.  
-            Socket listener = new Socket(AddressFamily.InterNetwork,
-                SocketType.Stream, ProtocolType.Tcp);
-
-            // Bind the socket to the local endpoint and   
-            // listen for incoming connections.  
-            try
-            {
-                listener.Bind(localEndPoint);
-                listener.Listen(10);
-
-                // Start listening for connections.  
-                while (true)
-                {
-                    logger.Info("Waiting for a connection...");
-                    Console.WriteLine("Waiting for a connection...");
-                    // Program is suspended while waiting for an incoming connection.  
-                    Socket handler = listener.Accept();
-                    string data = null;
-
-                    // An incoming connection needs to be processed.  
-                    while (true)
-                    {
-                        bytes = new byte[1024];
-                        int bytesRec = handler.Receive(bytes);
-                        data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                        if (data.Equals("StopListen<EOF>"))
-                        {
-                            Console.WriteLine("Close server listener socket.");
-                            listener.Close();
-                            return;
-                        }
-                        if (data.IndexOf("<EOF>") > -1)
-                        {
-                            handler.Send(Encoding.ASCII.GetBytes(data));
-                            Console.WriteLine("Text received : {0}", data);
-
-                            AddCommandToQueue(data.Substring(0, data.IndexOf("<")));
-                            //break;
-                        }
-                    }
-
-                }
-
-            }
-            catch (Exception e)
-            {
-                logger.Error("Error at ReadCommandsFromTCP {0}", e.Message);
-            }
-            //finally
-            //{
-            //    Console.WriteLine("\nPress ENTER to continue...");
-            //    Console.Read();
-            //}
         }
 
         private void AddCommandToQueue(string cmdText)
@@ -583,12 +485,13 @@ namespace WarGame.Models
             }
         }
 
-        public void StartCommndsExecution()
+        private void PushCommandToQueue(object sender, PushCommandArgs args)
         {
-            ExecuteCommandsThread.Start();
+            logger.Trace("Command received from reader: {0}", args.Command);
+            AddCommandToQueue(args.Command);
         }
 
-        private void ExecuteCommands()
+        private void Execute()
         {
             while (true)
             {
@@ -596,7 +499,8 @@ namespace WarGame.Models
                 commands.TryTake(out command);
                 if (command != null)
                 {
-                    Console.WriteLine("Executing command from thread [{0}]", Thread.CurrentThread.ManagedThreadId);
+                    // Console.WriteLine("Executing command from thread [{0}]", Thread.CurrentThread.ManagedThreadId);
+                    logger.Trace("Executing command {0} from thread [{1}]", command.GetType().Name, Thread.CurrentThread.ManagedThreadId);
                     command.Execute();
                 }
                 else
@@ -606,6 +510,31 @@ namespace WarGame.Models
                 }
             }
         }
+
+        #endregion
+
+        #region Test Methods
+
+        public void ListUnits()
+        {
+            Console.WriteLine("Player Units:");
+            foreach (var unit in Units)
+            {
+               Console.WriteLine(unit);
+            }
+            Console.WriteLine("");
+        }
+
+        public void ListBuildings()
+        {
+            Console.WriteLine("Player Buildings:");
+            foreach (var building in Buildings)
+            {
+                Console.WriteLine(building);
+            }
+            Console.WriteLine("");
+        }
+
         #endregion
     }
 }

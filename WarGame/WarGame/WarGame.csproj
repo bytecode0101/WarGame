@@ -70,14 +70,17 @@
     <Compile Include="Models\Commands\BlockingQueue.cs" />
     <Compile Include="Models\Commands\ICommand.cs" />
     <Compile Include="Models\Commands\PlayerCommand.cs" />
+    <Compile Include="Models\Events\PushCommandArgs.cs" />
+    <Compile Include="Models\Events\PushCommandEvent.cs" />
     <Compile Include="Models\Events\UnderAttackArgs.cs" />
     <Compile Include="Models\Events\ConstructionArgs.cs" />
     <Compile Include="Models\Events\ConstructionEvent.cs" />
     <Compile Include="Models\Events\NewTurn.cs" />
     <Compile Include="Models\Events\NewTurnArgs.cs" />
     <Compile Include="Models\Events\UnderAttack.cs" />
-    <Compile Include="Models\GatherEvent.cs" />
-    <Compile Include="Models\ITurnBasedComponent.cs" />
+    <Compile Include="Models\FileCommandReader.cs" />
+    <Compile Include="Models\Events\GatherEvent.cs" />
+    <Compile Include="Models\ICommandReader.cs" />
     <Compile Include="Models\Units\BowmanUpgrade1.cs" />
     <Compile Include="Models\Units\BowmanUpgrade2.cs" />
     <Compile Include="Models\Units\DecoratorUnit.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="Models\Tile.cs" />
     <Compile Include="Models\Units\AbstractUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\TcpCommandReader.cs" />
     <Compile Include="Utils\Serializable.cs" />
     <Compile Include="Utils\Serializer.cs" />
   </ItemGroup>

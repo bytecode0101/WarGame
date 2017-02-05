@@ -17,6 +17,9 @@ namespace WarGame.Models
 
         #region Events
 
+        /// <summary>
+        /// Used to process player actions based on turn event
+        /// </summary>
         public event NewTurn NewTurnEvent;
 
         #endregion
@@ -111,10 +114,20 @@ namespace WarGame.Models
         #endregion
 
         #region Public Methods
+
+
+        /// <summary>
+        ///   Start game
+        /// </summary>
         public void Start()
         {
         }
 
+
+        /// <summary>
+        /// Load game map from file 
+        /// </summary>
+        /// <param name="path"></param>
         public void Load(string path)
         {
             logger.Fatal("loading {0}", path);
@@ -126,6 +139,10 @@ namespace WarGame.Models
             DeserializeGame(text);
         }
 
+        /// <summary>
+        /// Save game to local file
+        /// </summary>
+        /// <param name="path"></param>
         public void Save(string path)
         {
             var text = SerializeGame();
@@ -135,16 +152,31 @@ namespace WarGame.Models
             }
         }
 
-        public void NewTurn()
+        /// <summary>
+        /// Save game to local file using JSON serialization
+        /// </summary>
+        /// <param name="path"></param>
+        public void SaveJson(string path)
         {
-            foreach (var item in Players)
+            JsonSerializer serializer = new JsonSerializer();
+            var sw = new StreamWriter(path);
+            using (JsonWriter writer = new JsonTextWriter(sw) { Formatting = Formatting.Indented })
             {
-                item.NewTurn();
+                serializer.Serialize(writer, this);
             }
         }
+
+        //public void NewTurn()
+        //{
+        //    foreach (var item in Players)
+        //    {
+        //        item.NewTurn();
+        //    }
+        //}
         #endregion
 
         #region Private Methods
+
         private string SerializeGame()
         {
             StringBuilder res = new StringBuilder();
@@ -159,16 +191,6 @@ namespace WarGame.Models
                 }
             }
             return res.ToString();
-        }
-
-        public void SaveJson(string path)
-        {
-            JsonSerializer serializer = new JsonSerializer();
-            var sw = new StreamWriter(path);
-            using (JsonWriter writer = new JsonTextWriter(sw) { Formatting = Formatting.Indented })
-            {
-                serializer.Serialize(writer, this);
-            }
         }
 
         private void DeserializeGame(string text)
