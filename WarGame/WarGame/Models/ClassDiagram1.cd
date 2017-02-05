@@ -1,203 +1,341 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="WarGame.Models.Resources.Food" Collapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+  <Class Name="WarGame.Models.Game" Collapsed="true">
+    <Position X="0.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Resources\Food.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="WarGame.Models.Resources.Gold" Collapsed="true">
-    <Position X="2.75" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Resources\Gold.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="WarGame.Models.Resources.Iron" Collapsed="true">
-    <Position X="7.25" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Resources\Iron.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="WarGame.Models.Resources.Resource" Collapsed="true">
-    <Position X="5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Resources\Resource.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="WarGame.Models.Resources.Stone" Collapsed="true">
-    <Position X="5" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Resources\Stone.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="WarGame.Models.Resources.Wood" Collapsed="true">
-    <Position X="9.5" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Resources\Wood.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="WarGame.Models.Game">
-    <Position X="0.5" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAkIAAADAABAAACAAAEAgAEAAgAAAAIAAAAAAAAAQ=</HashCode>
+      <HashCode>AQQAkIAAADAABAACCAAAEAgEEABgAAAAYBAAAAAAAAQ=</HashCode>
       <FileName>Models\Game.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WarGame.Models.Map">
-    <Position X="4.25" Y="4.75" Width="1.5" />
+  <Class Name="WarGame.Models.Map" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEiAAAAIgAAgAAAAIAAAAAAAQAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEiAAAAIgQAgAAAAIAAAAAAAQAAAA=</HashCode>
       <FileName>Models\Map.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WarGame.Models.Player">
-    <Position X="2.25" Y="4.75" Width="1.5" />
+  <Class Name="WarGame.Models.Player" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAYBAAAmAAwAAABgAAAQAQgAAAEAAAAAAAAAQ=</HashCode>
+      <HashCode>EIECEBBAYJIAymACQIgBhASEAYAQgAACEAAgAESAAAY=</HashCode>
       <FileName>Models\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WarGame.Models.Point">
-    <Position X="11.75" Y="2.75" Width="1.5" />
+  <Class Name="WarGame.Models.Point" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>Models\Point.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WarGame.Models.Tile">
-    <Position X="6.25" Y="4.75" Width="1.5" />
+  <Class Name="WarGame.Models.Tile" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Tile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Units.Farmer" Collapsed="true">
-    <Position X="8" Y="6.25" Width="1.5" />
+    <Position X="1.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAIAAAQAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Units\Farmer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WarGame.Models.Units.Soldier" Collapsed="true">
-    <Position X="10.25" Y="6.25" Width="1.5" />
+  <Class Name="WarGame.Models.Units.BowmanUpgrade1" Collapsed="true">
+    <Position X="5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAIAAAQAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Units\Soldier.cs</FileName>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Units\BowmanUpgrade1.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Units.AbstractUnit" Collapsed="true">
-    <Position X="9.25" Y="5" Width="1.5" />
+    <Position X="2.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAECAAAAAIAAAAAgIAIAIAACgIAAAQAAAAAAAAABAgA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAAAgIAAAIAAAgIAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>Models\Units\AbstractUnit.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="WarGame.Models.Buildings.Barrack" Collapsed="true">
-    <Position X="3" Y="16.75" Width="1.5" />
+    <Position X="9" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\Barrack.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WarGame.Models.Buildings.AbstractBuilding">
-    <Position X="3" Y="12" Width="1.5" />
+  <Class Name="WarGame.Models.Buildings.AbstractBuilding" Collapsed="true">
+    <Position X="9.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAECAAAAQAAAAEAgYAAgJAAAgAAAAAAAAAAAAAABAgA=</HashCode>
+      <HashCode>AAAAAAAAQAAAAEAgYAAAJAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\AbstractBuilding.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="WarGame.Models.Buildings.Farm" Collapsed="true">
-    <Position X="4.75" Y="16.75" Width="1.5" />
+    <Position X="10.75" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAgAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\Farm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Capabilities.AbstractTrainCapability" Collapsed="true">
-    <Position X="10.25" Y="9.5" Width="1.5" />
+    <Position X="6" Y="10.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Capabilities\AbstractTrainCapability.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Capabilities.BuildBarrackCapability" Collapsed="true">
-    <Position X="7.75" Y="11" Width="1.5" />
+    <Position X="3.75" Y="9.25" Width="1.5" />
+    <InheritanceLine Type="WarGame.Models.Capabilities.AbstractBuildCapability" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="10.812" />
+        <Point X="3.125" Y="10.812" />
+        <Point X="3.125" Y="9.596" />
+        <Point X="3.75" Y="9.596" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Capabilities\BuildBarrackCapability.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Capabilities.BuildBowWorkshopCapability" Collapsed="true">
-    <Position X="6" Y="11" Width="1.5" />
+    <Position X="3.75" Y="10.75" Width="1.5" />
+    <InheritanceLine Type="WarGame.Models.Capabilities.AbstractBuildCapability" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="10.812" />
+        <Point X="3.125" Y="10.812" />
+        <Point X="3.125" Y="11.127" />
+        <Point X="3.75" Y="11.127" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Capabilities\BuildBowWorkshopCapability.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Capabilities.TrainBowmanCapability" Collapsed="true">
-    <Position X="11.25" Y="11" Width="1.5" />
+    <Position X="9" Y="11" Width="1.5" />
+    <InheritanceLine Type="WarGame.Models.Capabilities.AbstractTrainCapability" FixedFromPoint="true">
+      <Path>
+        <Point X="8" Y="10.562" />
+        <Point X="8.375" Y="10.562" />
+        <Point X="8.375" Y="11.346" />
+        <Point X="9" Y="11.346" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Capabilities\TrainBowmanCapability.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Capabilities.TrainSwordmanCapability" Collapsed="true">
-    <Position X="9.5" Y="11" Width="1.5" />
+    <Position X="9" Y="10.25" Width="1.5" />
+    <InheritanceLine Type="WarGame.Models.Capabilities.AbstractTrainCapability" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="10.562" />
+        <Point X="9" Y="10.562" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Capabilities\TrainSwordmanCapability.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Capabilities.AbstractBuildCapability" Collapsed="true">
-    <Position X="7" Y="9.25" Width="1.5" />
+    <Position X="0.5" Y="10.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Capabilities\AbstractBuildCapability.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Buildings.BowWorkshop" Collapsed="true">
-    <Position X="1.25" Y="16.75" Width="1.5" />
+    <Position X="7" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\BowWorkshop.cs</FileName>
       <NewMemberFileName>Models\Buildings\Bowworkshop.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WarGame.Models.Buildings.DecoratorBuilding">
-    <Position X="7.5" Y="12" Width="1.5" />
+  <Class Name="WarGame.Models.Buildings.DecoratorBuilding" Collapsed="true">
+    <Position X="12.75" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\DecoratorBuilding.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Buildings.BarrackLevel1" Collapsed="true">
-    <Position X="6.5" Y="14.5" Width="1.5" />
+    <Position X="10.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\BarrackLevel1.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WarGame.Models.Buildings.BarrackLevel2" Collapsed="true">
-    <Position X="8.5" Y="14.5" Width="1.5" />
+    <Position X="12" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Buildings\BarrackLevel2.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WarGame.Wrapper.BuildingWrapper">
-    <Position X="0.75" Y="12" Width="1.5" />
+  <Class Name="WarGame.Models.Buildings.BowWorkshopLevel1" Collapsed="true">
+    <Position X="15.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAABAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Wrapper\BuildingWrapper.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Buildings\BowWorkshopLevel1.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="WarGame.Models.Buildings.BowWorkshopLevel2" Collapsed="true">
+    <Position X="13.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Buildings\BowWorkshopLevel2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Capabilities.TrainFarmerCapability" Collapsed="true">
+    <Position X="9" Y="9.5" Width="1.5" />
+    <InheritanceLine Type="WarGame.Models.Capabilities.AbstractTrainCapability" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="8" Y="10.562" />
+        <Point X="8.375" Y="10.562" />
+        <Point X="8.375" Y="9.846" />
+        <Point X="9" Y="9.846" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Capabilities\TrainFarmerCapability.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Capabilities.UpgradeBarrackCapability" Collapsed="true">
+    <Position X="3.75" Y="10" Width="1.5" />
+    <InheritanceLine Type="WarGame.Models.Capabilities.AbstractBuildCapability" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="10.812" />
+        <Point X="3.125" Y="10.812" />
+        <Point X="3.125" Y="10.346" />
+        <Point X="3.75" Y="10.346" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Capabilities\UpgradeBarrackCapability.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Capabilities.UpgradeBowWorkshopCapability" Collapsed="true">
+    <Position X="3.75" Y="11.5" Width="1.5" />
+    <InheritanceLine Type="WarGame.Models.Capabilities.AbstractBuildCapability" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="10.812" />
+        <Point X="3.125" Y="10.812" />
+        <Point X="3.125" Y="11.846" />
+        <Point X="3.75" Y="11.846" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Capabilities\UpgradeBowWorkshopCapability.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Units.DecoratorUnit" Collapsed="true">
+    <Position X="4" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQACAgAAAAIAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Units\DecoratorUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Units.BowmanUpgrade2" Collapsed="true">
+    <Position X="6.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Units\BowmanUpgrade2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Units.SwordManUpgrade1" Collapsed="true">
+    <Position X="1.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Units\SwordManUpgrade1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Units.SwordManUpgrade2" Collapsed="true">
+    <Position X="3.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Units\SwordManUpgrade2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.AbstractBuildable" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAgAAgAAAIAAQAAIAAAAIAAIgAAAABAAA=</HashCode>
+      <FileName>Models\AbstractBuildable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Pawn" Collapsed="true">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAQAAAAACAAIAAAACAAAQAQAEAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Pawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Utils.Serializable" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\Serializable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Events.ConstructionArgs" Collapsed="true">
+    <Position X="3.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Events\ConstructionArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Events.NewTurnArgs" Collapsed="true">
+    <Position X="3.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Events\NewTurnArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarGame.Models.Events.UnderAttackArgs" Collapsed="true">
+    <Position X="3.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Events\UnderAttackArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="WarGame.Models.Resources.Resource" Collapsed="true">
+    <Position X="6.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAgAgAAAAE=</HashCode>
+      <FileName>Models\Resources\Resource.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="WarGame.Models.Events.UnderConstruction" Collapsed="true">
+    <Position X="1.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAABAAAA=</HashCode>
+      <FileName>Models\Events\ConstructionEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="WarGame.Models.Events.NewTurn" Collapsed="true">
+    <Position X="1.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Events\NewTurn.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="WarGame.Models.Events.UnderAttack" Collapsed="true">
+    <Position X="1.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIABAAAA=</HashCode>
+      <FileName>Models\Events\UnderAttack.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

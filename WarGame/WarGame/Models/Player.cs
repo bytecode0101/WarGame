@@ -215,10 +215,6 @@ namespace WarGame.Models
 
 
         }
-
-
-
-
         #endregion
 
         #region Public Methods
