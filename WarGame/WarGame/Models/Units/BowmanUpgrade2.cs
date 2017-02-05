@@ -7,7 +7,7 @@ using WarGame.Models.Units;
 
 namespace WarGame.Models.Units
 {
-    class BowmanUpgrade2:DecoratorUnit
+    public class BowmanUpgrade2:DecoratorUnit
     {
         public BowmanUpgrade2(BowmanUpgrade1 farmer)
         {

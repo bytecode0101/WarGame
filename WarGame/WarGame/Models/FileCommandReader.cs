@@ -4,7 +4,7 @@ using WarGame.Models.Events;
 
 namespace WarGame.Models
 {
-    class FileCommandReader : ICommandReader
+    public class FileCommandReader : ICommandReader
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 

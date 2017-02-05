@@ -130,7 +130,7 @@ namespace WarGame.Models
         /// <param name="path"></param>
         public void Load(string path)
         {
-            logger.Fatal("loading {0}", path);
+            //logger.Fatal("loading {0}", path);
             string text;
             using (var sr = new StreamReader(path))
             {

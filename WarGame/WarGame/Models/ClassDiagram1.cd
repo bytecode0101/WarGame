@@ -3,7 +3,7 @@
   <Class Name="WarGame.Models.Game" Collapsed="true">
     <Position X="0.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQQAkIAAADAABAACCAAAEAgEEABgAAAAYBAAAAAAAAQ=</HashCode>
+      <HashCode>AQQAkIAAADAABAACCAAAEAgEEABgAAAAYBAAAAAAAAA=</HashCode>
       <FileName>Models\Game.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -277,7 +277,7 @@
   <Class Name="WarGame.Models.Pawn" Collapsed="true">
     <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAgAAAQAAAAACAAIAAAACAAAQAQAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAAACAAIAAAACAAAAAQAEAAAAAAAAAAA=</HashCode>
       <FileName>Models\Pawn.cs</FileName>
     </TypeIdentifier>
   </Class>

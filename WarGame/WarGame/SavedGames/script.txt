@@ -19,3 +19,4 @@ Move 5,5
 Attack 0, 20
 List Units
 List Buildings
+StopGame

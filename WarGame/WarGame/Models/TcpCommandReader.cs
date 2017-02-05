@@ -7,7 +7,7 @@ using WarGame.Models.Events;
 
 namespace WarGame.Models
 {
-    class TcpCommandReader : ICommandReader
+    public class TcpCommandReader : ICommandReader
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 

@@ -21,8 +21,8 @@ namespace WarGame
         {
             game = Game.Instance;
             game.Load("SavedGames\\Map.txt");
-            //ICommandReader commandReader = new FileCommandReader();
-            ICommandReader commandReader = new TcpCommandReader();
+            ICommandReader commandReader = new FileCommandReader();
+           // ICommandReader commandReader = new TcpCommandReader();
             player1 = new Player(game.Map, commandReader);
         }
 

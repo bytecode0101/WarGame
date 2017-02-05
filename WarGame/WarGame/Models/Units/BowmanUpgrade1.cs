@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarGame.Models.Units
 {
-    class BowmanUpgrade1 :DecoratorUnit
+    public class BowmanUpgrade1 :DecoratorUnit
     {
         public BowmanUpgrade1(Farmer farmer)
         {

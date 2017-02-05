@@ -33,13 +33,13 @@ namespace WarGame.Models
             {
                 if (unit.GetType() == typeof(Farmer))
                 {
-                    if (Resources.ContainsKey(map.GetResourcePosition(pawn.Location)))
+                    if (Resources.ContainsKey(map.GetResource(pawn.Location)))
                     {
-                        Resources[map.GetResourcePosition(pawn.Location)]++;
+                        Resources[map.GetResource(pawn.Location)]++;
                     }
                     else
                     {
-                        Resources.Add(map.GetResourcePosition(pawn.Location), 1);
+                        Resources.Add(map.GetResource(pawn.Location), 1);
                     }
                 }
             }
@@ -220,6 +220,7 @@ namespace WarGame.Models
 
             AddBuilding(new Farm(0, 0, 100));
             Pawn = new Pawn();
+            Pawn.Location = new Point(0, 0);
             Pawn.GatherEvent += Pawn_GatherEvent;
 
             CommandReader = commandReader;
@@ -346,6 +347,9 @@ namespace WarGame.Models
             PlayerCommand playerCommand;
             switch (commandName)
             {
+                case "StopGame":
+                    commands.TryAdd(new StopCommand());
+                    break;
                 case "Move":
                     {
                         int x;
@@ -497,6 +501,10 @@ namespace WarGame.Models
             {
                 ICommand command;
                 commands.TryTake(out command);
+                if(command.GetType() == typeof(StopCommand))
+                {
+                    break;
+                }
                 if (command != null)
                 {
                     // Console.WriteLine("Executing command from thread [{0}]", Thread.CurrentThread.ManagedThreadId);
