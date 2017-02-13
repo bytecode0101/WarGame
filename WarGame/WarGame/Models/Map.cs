@@ -13,6 +13,7 @@ namespace WarGame.Models
         #endregion
 
         #region Properties
+
         public Tile[,] Tiles
         {
             get

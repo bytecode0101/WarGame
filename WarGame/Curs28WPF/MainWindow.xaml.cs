@@ -1,5 +1,4 @@
 ﻿using Curs28WPF.ViewModels;
-using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Curs28WPF
@@ -9,21 +8,7 @@ namespace Curs28WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableCollection<FarmVM> farms;
-        private FarmVM myFarm;
-
-        public ObservableCollection<FarmVM> Farms
-        {
-            get
-            {
-                return farms;
-            }
-
-            set
-            {
-                farms = value;
-            }
-        }
+        private MapVM mapVM;
 
         public MainWindow()
         {
@@ -31,22 +16,32 @@ namespace Curs28WPF
             Init();
         }
 
+        internal MapVM MapVM
+        {
+            get
+            {
+                return mapVM;
+            }
+
+            set
+            {
+                mapVM = value;
+            }
+        }
+
         public void Init()
         {
-            Farms = new ObservableCollection<FarmVM>();
+            MapVM = new MapVM();
+            //Farms = new ObservableCollection<FarmVM>();
             //FarmsLV.ItemsSource = Farms;
-            FarmsLVItemsControl.ItemsSource = Farms;
+            //FarmsLVItemsControl.ItemsSource = Farms;
            // myFarm = new FarmVM();
             //Farm1.DataContext = myFarm;
         }
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            textBox.Text = "hello world";
-        }
-
+       
         private void btnNewFarm_Click(object sender, RoutedEventArgs e)
         {
-            farms.Add(new FarmVM());
+           // farms.Add(new FarmVM());
            // myFarm.X++;
         }
     }

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Curs28WPF.Views
 {
     /// <summary>
-    /// Interaction logic for Farm.xaml
+    /// Interaction logic for Map.xaml
     /// </summary>
-    public partial class Farm : UserControl
+    public partial class Map : UserControl
     {
-        public Farm()
+        public Map()
         {
             InitializeComponent();
         }

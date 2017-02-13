@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Curs28WPF.Views.Tile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Curs28WPF.Views"
+             xmlns:converters="clr-namespace:Curs28WPF.Converters"
+             mc:Ignorable="d" Height="168.045" Width="184.962">
+    <UserControl.Resources>
+        <converters:ResourceToColorConverter x:Key="ResourceToColorConverter" />
+    </UserControl.Resources>
+    <Grid Background="{Binding Resource, Converter={StaticResource ResourceToColorConverter}}">
+            
+    </Grid>
+</UserControl>

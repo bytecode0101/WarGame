@@ -1,12 +1,6 @@
 ﻿using NLog;
 using System;
-using System.Collections.Generic;
-using System.Threading;
 using WarGame.Models;
-using WarGame.Models.Buildings;
-using WarGame.Models.Capabilities;
-using WarGame.Models.Resources;
-using WarGame.Models.Units;
 
 namespace WarGame
 {
